@@ -26,9 +26,13 @@ public class PlayerMove : MonoBehaviour
     // 통과불가능한 레이어를 설정해주기 위해 선언
     public LayerMask layerMask;
 
+    // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
+    private Animator animator;
+
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
     }
     IEnumerator MoveCoroutine() // 코루틴은 프레임과 상관없이 특정시간동안 작업을 수행할 수 있게 해준다.
@@ -51,6 +55,15 @@ public class PlayerMove : MonoBehaviour
             }
             */
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+            // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
+            // 동시입력시에 상하키는 기본 0이 되도록 설정
+            if (vector.x != 0 )
+            {
+                vector.y = 0;
+            }
+            animator.SetFloat("DirX", vector.x);
+            animator.SetFloat("DirY", vector.y);
+            animator.SetBool("Walking", true);
             
             // A->B로 레이저를 쏴서 제대로 도착했을때 Null, 막혔을때 방해물이 Return
             RaycastHit2D hit;
@@ -105,7 +118,8 @@ public class PlayerMove : MonoBehaviour
         }
         canMove = true;
 
-
+        // Walking 값 리셋
+        animator.SetBool("Walking", false);
     }
 
     // Update is called once per frame
