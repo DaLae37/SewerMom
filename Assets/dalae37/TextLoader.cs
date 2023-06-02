@@ -63,7 +63,7 @@ public class TextLoader : MonoBehaviour
         {
             Text.text = chainingString.Substring(0, chainingStringIndex++);
             yield return new WaitForSeconds(0.1f);
-        } while (chainingStringIndex != chainingString.Length);
+        } while (chainingStringIndex <= chainingString.Length);
         isChainingDone = true;
     }
 }
