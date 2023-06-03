@@ -29,6 +29,15 @@ public class PlayerMove : MonoBehaviour
     // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
     // private Animator animator;
 
+
+
+    // ㅡㅡㅡㅡㅡㅡ맵 이동 관련ㅡㅡㅡㅡㅡㅡ //
+    static public PlayerMove instance; // instance의 값을 공유
+    public string currentMapName; // 현재 맵 이름 저장
+    public bool IsKeydown = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -127,10 +136,22 @@ public class PlayerMove : MonoBehaviour
     {
         // 좌측 방향키면 -1, 우측 방향키면 1, 상측 방향키면 1, 하측 방향키면 -1
         // 버튼을 눌렀을 때 실행
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            IsKeydown = true;
+        }
+        if (Input.GetKeyUp(KeyCode.A))
 
+        {
+            IsKeydown = false;
+        }
+
+    }
+    private void LateUpdate()
+    {
         if (canMove)
         {
-            if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
             {
                 canMove = false;
                 StartCoroutine(MoveCoroutine());
