@@ -120,7 +120,7 @@ public class PlayerMove : MonoBehaviour
 
                 // 0.01f의 대기시간을 가지고 while문 반복
                 // 이는 컴퓨터의 속도로 인해 객체가 순간이동한 듯한 모션을 자연스럽게 움직이는 형태로 보여지게 해줍니다.
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.001667f);
             }
             // 변수 리셋
             currentWalkCount = 0;
@@ -134,17 +134,22 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         // 좌측 방향키면 -1, 우측 방향키면 1, 상측 방향키면 1, 하측 방향키면 -1
         // 버튼을 눌렀을 때 실행
         if (Input.GetKeyDown(KeyCode.A))
         {
             IsKeydown = true;
         }
+       
         if (Input.GetKeyUp(KeyCode.A))
 
         {
             IsKeydown = false;
         }
+
+        
 
     }
     private void LateUpdate()
