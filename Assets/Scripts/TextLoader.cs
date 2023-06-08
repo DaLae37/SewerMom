@@ -24,7 +24,10 @@ public class TextLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.V))
+        {
+            SetText("StartRoomClose");
+        }
     }
 
     public void LoadTextFromFile(string fileName) //Reading StoryText at TextFile's Location
@@ -35,7 +38,7 @@ public class TextLoader : MonoBehaviour
         string readStr = null;
         while ((readStr = reader.ReadLine()) != null)
         {
-            string []keyValue = readStr.Split(":");
+            string[] keyValue = readStr.Split(":");
             text.Add(keyValue[0], keyValue[1]);
         }
         reader.Close();
@@ -53,8 +56,14 @@ public class TextLoader : MonoBehaviour
     public void SetText(string key)
     {
         Text.text = text[key];
+        StartCoroutine(TextCloser());
     }
 
+    IEnumerator TextCloser()
+    {
+        yield return new WaitForSeconds(1f);
+        Text.text = "";
+    }
     //한 줄씩 출력
     IEnumerator ChainingText()
     {
@@ -65,5 +74,6 @@ public class TextLoader : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         } while (chainingStringIndex <= chainingString.Length);
         isChainingDone = true;
+        StartCoroutine(TextCloser());
     }
 }

@@ -21,7 +21,7 @@ public class Train : MonoBehaviour
     void Update()
     {
         transform.position = new Vector3(transform.position.x + Time.deltaTime * ((shakeX) ? -0.25f : 0.25f), transform.position.y - Time.deltaTime * 5, transform.position.z);
-        if(transform.position.x < -0.1f || transform.position.x > 0.1f)
+        if(transform.position.x < -0.1f || transform.position.x > 0.3f)
         {
             shakeX = !shakeX;
         }
