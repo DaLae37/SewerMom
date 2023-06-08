@@ -29,7 +29,7 @@ public class ChangeMap : MonoBehaviour
     
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.name == "Player" && thePlayer.IsKeydown)
+        if(collision.gameObject.name == "ToDoor" && thePlayer.IsKeydown)
         {
             thePlayer.IsKeydown = false;
             // SceneManager.LoadScene(changeMapName);
