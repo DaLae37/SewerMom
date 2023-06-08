@@ -18,7 +18,7 @@ public class PlayerMove : MonoBehaviour
     public int walkCount; // 방향키 입력시 이동값을 정하기 위한 값
     private int currentWalkCount; // 이동값 리셋을 위한 값
 
-    private bool canMove = true; // 방향키 이동 반복실행 방지를 위한 값
+    public bool canMove = true; // 방향키 이동 반복실행 방지를 위한 값
 
     // ㅡㅡㅡㅡㅡㅡ플레이어 충돌 판정ㅡㅡㅡㅡㅡㅡ //
     // BoxCollider 컴포넌트를 가져오기 위해 선언
@@ -37,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     public bool IsKeydown = false;
 
 
+    public bool inhide = false;
 
     // Start is called before the first frame update
     void Start()
@@ -47,6 +48,7 @@ public class PlayerMove : MonoBehaviour
     IEnumerator MoveCoroutine() // 코루틴은 프레임과 상관없이 특정시간동안 작업을 수행할 수 있게 해준다.
                                 // 예를 들자면 게임내의 버프효과
     {
+
         // 키입력이 이뤄지는 동안 실행
         // 코루틴은 한번만 실행되고 입력이 이뤄지면 계속 실행
         while (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
@@ -63,17 +65,19 @@ public class PlayerMove : MonoBehaviour
                 applyRunFlag = false;
             }
             */
-            vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
-            // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
-            // 동시입력시에 상하키는 기본 0이 되도록 설정
-            if (vector.x != 0 )
+            if (!inhide)
             {
-                vector.y = 0;
+                vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+                // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
+                // 동시입력시에 상하키는 기본 0이 되도록 설정
+                if (vector.x != 0)
+                {
+                    vector.y = 0;
+                }
+                animator.SetFloat("DirX", vector.x);
+                animator.SetFloat("DirY", vector.y);
+                animator.SetBool("Walking", true);
             }
-            animator.SetFloat("DirX", vector.x);
-            animator.SetFloat("DirY", vector.y);
-            animator.SetBool("Walking", true);
-            
             // A->B로 레이저를 쏴서 제대로 도착했을때 Null, 막혔을때 방해물이 Return
             RaycastHit2D hit;
 
@@ -100,6 +104,12 @@ public class PlayerMove : MonoBehaviour
             // 이동시 Shift키 입력여부 확인하여 Speed 값 추가(2.4)
             while (currentWalkCount < walkCount)
             {
+                if (inhide)
+                {
+                    
+                    animator.SetBool("Walking", false);
+                    break;
+                }
                 if (vector.x != 0)
                 {
                     transform.Translate(vector.x * speed, 0, 0); // 달리기 (speed + applyRunSpeed)
@@ -117,11 +127,11 @@ public class PlayerMove : MonoBehaviour
                 */
                 currentWalkCount++;
 
-
-                // 0.01f의 대기시간을 가지고 while문 반복
-                // 이는 컴퓨터의 속도로 인해 객체가 순간이동한 듯한 모션을 자연스럽게 움직이는 형태로 보여지게 해줍니다.
-                yield return new WaitForSeconds(0.001667f);
             }
+            // 0.01f의 대기시간을 가지고 while문 반복
+            // 이는 컴퓨터의 속도로 인해 객체가 순간이동한 듯한 모션을 자연스럽게 움직이는 형태로 보여지게 해줍니다.
+            yield return new WaitForSeconds(0.001667f);
+
             // 변수 리셋
             currentWalkCount = 0;
         }

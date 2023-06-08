@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Number
   - Monster
+  - FlashLight
   layers:
   - Default
   - TransparentFX
