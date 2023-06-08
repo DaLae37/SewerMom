@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 69088622701541850}
   - component: {fileID: 1821243180125929025}
   m_Layer: 0
-  m_Name: Rightt2
+  m_Name: Right1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 6780479055253856146}
   - component: {fileID: 6912348505139598412}
   m_Layer: 0
-  m_Name: Right1
+  m_Name: Right_IDLE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -263,7 +263,7 @@ GameObject:
   - component: {fileID: 170238131680090424}
   - component: {fileID: 84756174346811495}
   m_Layer: 0
-  m_Name: Left1
+  m_Name: Left_IDLE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -515,7 +515,7 @@ GameObject:
   - component: {fileID: 5745151945498959249}
   - component: {fileID: 5127143132987320876}
   m_Layer: 0
-  m_Name: Left2
+  m_Name: Left1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ GameObject:
   - component: {fileID: 3767961461168188418}
   - component: {fileID: 1555177115635763}
   m_Layer: 0
-  m_Name: Right_IDLE
+  m_Name: Right2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,6 +1008,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 956770f1ce0fdd942aa5658405683624, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animation:
+  - {fileID: 342411157031348996}
+  - {fileID: 5068374921870417274}
+  - {fileID: 8468105064243242811}
+  - {fileID: 4952802228065042324}
+  - {fileID: 2377041060854642439}
+  - {fileID: 6512956911949628805}
+  - {fileID: 778481938022886070}
+  - {fileID: 1066461530973699459}
+  - {fileID: 5350796764007858805}
+  - {fileID: 3932578244599422434}
+  - {fileID: 5429414719546191215}
+  - {fileID: 6156941792747818279}
+  animationMaxTime: 0.25
 --- !u!1 &6512956911949628805
 GameObject:
   m_ObjectHideFlags: 0
@@ -1019,7 +1033,7 @@ GameObject:
   - component: {fileID: 2006511545149168963}
   - component: {fileID: 4694425949120693451}
   m_Layer: 0
-  m_Name: Left_IDLE
+  m_Name: Left2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
