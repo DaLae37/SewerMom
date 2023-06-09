@@ -1,1 +1,2 @@
 StartRoomClose:문이 잠겨있는 것 같다.
+GetKey:열쇠를 획득했다.

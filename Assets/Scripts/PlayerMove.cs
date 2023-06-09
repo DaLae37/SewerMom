@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
+        animator.SetBool("lighton", true);
     }
     IEnumerator MoveCoroutine() // 코루틴은 프레임과 상관없이 특정시간동안 작업을 수행할 수 있게 해준다.
                                 // 예를 들자면 게임내의 버프효과

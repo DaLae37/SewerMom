@@ -11,6 +11,7 @@ public class ChangeMap : MonoBehaviour
 
     private PlayerMove thePlayer;
     private CameraManager theCamera;
+    public GameObject inventorykey;
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class ChangeMap : MonoBehaviour
             theCamera.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, theCamera.transform.position.z);
             thePlayer.transform.position = target.transform.position;
             thePlayer.currentMapName = changeMapName;
+            inventorykey.SetActive(false);
         }
     }
 }
