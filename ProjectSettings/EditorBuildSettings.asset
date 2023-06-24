@@ -6,18 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/dalae37/LoadingScene.unity
+    path: Assets/Scenes/LoadingScene.unity
     guid: de5f207118533f84c8f55befd4453b1b
   - enabled: 1
-    path: Assets/dalae37/MainScene.unity
+    path: Assets/Scenes/MainScene.unity
     guid: 3b885aea8d231f84994cbdcc9c206572
   - enabled: 1
-    path: Assets/dalae37/SettingScene.unity
+    path: Assets/Scenes/SettingScene.unity
     guid: 78883612f29934042b430bf1f943f9c0
   - enabled: 1
-    path: Assets/dalae37/TutorialScene.unity
+    path: Assets/Scenes/TutorialScene.unity
     guid: eda2c1f0174cb5e42bef4a6d63b85b75
   - enabled: 1
-    path: Assets/dalae37/EndingScene.unity
+    path: Assets/Scenes/EndingScene.unity
     guid: 2b48f99638b3b9943a9185648526c353
+  - enabled: 1
+    path: Assets/Scenes/PasswordScene.unity
+    guid: f4c050fd20feebc45abb2372b749d536
   m_configObjects: {}
