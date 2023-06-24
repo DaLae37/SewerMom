@@ -6,8 +6,11 @@ using System.IO;
 
 public class TextLoader : MonoBehaviour
 {
+    public static TextLoader instance;
     public Dictionary<string, string> text = new Dictionary<string, string>(); //Text Array
     public Text Text;
+
+    public GameObject textBackground;
 
     //한 줄씩 출력
     private bool isChainingDone;
@@ -17,6 +20,7 @@ public class TextLoader : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        instance = this;
         isChainingDone = true;
         LoadTextFromFile("Test");
     }
@@ -56,6 +60,7 @@ public class TextLoader : MonoBehaviour
     public void SetText(string key)
     {
         Text.text = text[key];
+        textBackground.SetActive(true);
         StartCoroutine(TextCloser());
     }
 
@@ -63,6 +68,7 @@ public class TextLoader : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Text.text = "";
+        textBackground.SetActive(false);
     }
     //한 줄씩 출력
     IEnumerator ChainingText()
