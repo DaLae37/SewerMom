@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class SewerMom : MonoBehaviour
 {
     enum State
@@ -26,6 +26,8 @@ public class SewerMom : MonoBehaviour
     public float animationMaxTime = 0.2f;
     private float animationTimer;
     private int animationSelector;
+
+    public int currentMap = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,10 @@ public class SewerMom : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag == "Player") {
+            PlayerPrefs.SetInt("endingResult", 1);
+            SceneManager.LoadScene("EndingScene");
+        }
     }
 
     // Update is called once per frame
