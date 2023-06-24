@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     // ㅡㅡㅡㅡㅡㅡ플레이어 이동ㅡㅡㅡㅡㅡㅡ //
     public float speed; // 움직이는 속도 정의
-    private Vector3 vector; // 움직이는 방향 정의
+    private Vector2 vector; // 움직이는 방향 정의
 
     /*
     public float runSpeed; // Shift키 입력시 증가하는 속도
@@ -24,7 +24,6 @@ public class PlayerMove : MonoBehaviour
     // BoxCollider 컴포넌트를 가져오기 위해 선언
     private BoxCollider2D boxCollider;
     // 통과불가능한 레이어를 설정해주기 위해 선언
-    public LayerMask layerMask;
 
     // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
     public Animator animator;
@@ -68,7 +67,9 @@ public class PlayerMove : MonoBehaviour
             */
             if (!inhide)
             {
-                vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"), transform.position.z);
+                vector = Vector2.zero;
+
+                vector.Set(Input.GetAxisRaw("Horizontal") * speed, Input.GetAxisRaw("Vertical") * speed);
                 // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
                 // 동시입력시에 상하키는 기본 0이 되도록 설정
                 if (vector.x != 0)
@@ -79,25 +80,6 @@ public class PlayerMove : MonoBehaviour
                 animator.SetFloat("DirY", vector.y);
                 animator.SetBool("Walking", true);
             }
-            // A->B로 레이저를 쏴서 제대로 도착했을때 Null, 막혔을때 방해물이 Return
-            RaycastHit2D hit;
-
-            // A지점, 캐릭터의 현재 위치값
-            Vector2 start = transform.position;
-            // B지점, 캐릭터가 이동하고자 하는 위치값 (시작지점+이동값)
-            Vector2 end = start + new Vector2(vector.x * speed * walkCount, vector.y * speed * walkCount);
-
-            // 캐릭터에 BoxCollider가 적용되어 있어 그걸 충돌체로 인식하므로 해제 후 설정
-            boxCollider.enabled = false;
-            // 레이저 발사 (시작, 끝, 레이어마스크)
-            hit = Physics2D.Linecast(start, end, layerMask);
-            boxCollider.enabled = true;
-
-            // 벽으로 막혔을때 실행하지 않게 처리
-            if (hit.transform != null)
-            {
-                break;
-            }
             
 
 
@@ -107,17 +89,16 @@ public class PlayerMove : MonoBehaviour
             {
                 if (inhide)
                 {
-                    
                     animator.SetBool("Walking", false);
                     break;
                 }
                 if (vector.x != 0)
                 {
-                    transform.Translate(vector.x * speed, 0, 0); // 달리기 (speed + applyRunSpeed)
+                    GetComponent<Rigidbody2D>().velocity = vector;
                 }
                 else if (vector.y != 0)
                 {
-                    transform.Translate(0, vector.y * speed, 0);
+                    GetComponent<Rigidbody2D>().velocity = vector;
                 }
 
                 /* //달리기 키 입력시 동시에 실행하여 +2씩 증가하는 효과
@@ -160,18 +141,43 @@ public class PlayerMove : MonoBehaviour
             IsKeydown = false;
         }
 
-        
+
 
     }
-    private void LateUpdate()
+    private void FixedUpdate()
     {
-        if (canMove)
+        //if (canMove)
+        //{
+        //    if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        //    {
+        //        canMove = false;
+        //        StartCoroutine(MoveCoroutine());
+        //    }
+        //}
+        vector = Vector2.zero;
+        if (inhide)
         {
-            if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+            animator.SetBool("Walking", false);
+        }
+        else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
+        {
+            vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+             // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
+             // 동시입력시에 상하키는 기본 0이 되도록 설정
+            if (vector.x != 0)
             {
-                canMove = false;
-                StartCoroutine(MoveCoroutine());
+                vector.y = 0;
             }
+            animator.SetFloat("DirX", vector.x);
+            animator.SetFloat("DirY", vector.y);
+            animator.SetBool("Walking", true);
+            GetComponent<Rigidbody2D>().velocity = vector * speed;
+        }
+        else
+        {
+            animator.SetBool("Walking", false);
+            GetComponent<Rigidbody2D>().velocity = vector * speed;
+
         }
     }
 }

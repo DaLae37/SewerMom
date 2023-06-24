@@ -17,7 +17,7 @@ public class CameraManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         // 대상이 있는지 체크
         if(target.gameObject != null)
