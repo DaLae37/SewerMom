@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class SettingSceneManager : MonoBehaviour
 {
     public GameObject settingPanel;
@@ -33,6 +34,13 @@ public class SettingSceneManager : MonoBehaviour
     public void ResetGame()
     {
         //TODO : 게임 초기화
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+    public void MainScene()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 
     public void OnSettingPanel()

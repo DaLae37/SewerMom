@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Resources/Scenes/MainScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/dalae37/LoadingScene.unity
+    guid: de5f207118533f84c8f55befd4453b1b
+  - enabled: 1
+    path: Assets/dalae37/MainScene.unity
+    guid: 3b885aea8d231f84994cbdcc9c206572
+  - enabled: 1
+    path: Assets/dalae37/SettingScene.unity
+    guid: 78883612f29934042b430bf1f943f9c0
+  - enabled: 1
+    path: Assets/dalae37/TutorialScene.unity
+    guid: eda2c1f0174cb5e42bef4a6d63b85b75
   m_configObjects: {}
