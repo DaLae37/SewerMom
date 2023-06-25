@@ -14,19 +14,16 @@ public class leftopendoor : MonoBehaviour
     public GameObject leftopen;
     public GameObject rightopen;
     public GameObject blockcollider;
-    public int currentmap = 0; // 맵마다 세팅해줘야함 
-    private MapController map;
     // Start is called before the first frame update
     void Start()
     {
         thePlayer = FindObjectOfType<PlayerMove>();
-        map = FindObjectOfType<MapController>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose)
+        if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
         {
             isopen = true;
             leftclose.SetActive(false);
@@ -35,11 +32,10 @@ public class leftopendoor : MonoBehaviour
             blockcollider.SetActive(false);
             StartCoroutine("closedelay");
         }
-        else if (triggerOn && thePlayer.IsKeydown && isopen && canclose)
+        else if (triggerOn && thePlayer.IsKeydown && isopen && canclose) // 문닫기
         {
             isopen = false;
             leftclose.SetActive(true);
-            rightclose.SetActive(true);
             leftopen.SetActive(false);
             rightopen.SetActive(false);
             blockcollider.SetActive(true);
@@ -48,12 +44,12 @@ public class leftopendoor : MonoBehaviour
     }
     IEnumerator closedelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         canclose = true;
     }
     IEnumerator opendelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         canclose = false;
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -68,7 +64,6 @@ public class leftopendoor : MonoBehaviour
     {
         if (collision.gameObject.name == "fordoor") // 현재 맵 카운팅하기
         {
-            map.mapindex = currentmap;
             triggerOn = true;
         }
     }

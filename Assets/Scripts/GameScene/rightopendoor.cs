@@ -16,20 +16,17 @@ public class rightopendoor : MonoBehaviour
     public GameObject leftinteraction; // 왼쪽문 열고닫기 판정하는 오브젝트 가져오기. (isopen 공유를 위해)
     leftopendoor leftdoorscript; // 왼쪽문 스크립트 가져오기
 
-    public int currentmap = 0; // 맵마다 세팅해줘야함 
-    private MapController map;
     // Start is called before the first frame update
     void Start()
     {
         thePlayer = FindObjectOfType<PlayerMove>();
-        map = FindObjectOfType<MapController>();
         leftdoorscript = (leftopendoor)leftinteraction.GetComponent(typeof(leftopendoor));
     }
     
     // Update is called once per frame
     void Update()
     {
-        if(triggerOn && thePlayer.IsKeydown && !leftdoorscript.isopen && !leftdoorscript.canclose)
+        if(triggerOn && thePlayer.IsKeydown && !leftdoorscript.isopen && !leftdoorscript.canclose) //문열기
         {
             leftdoorscript.isopen = true;
             leftclose.SetActive(false);
@@ -38,10 +35,9 @@ public class rightopendoor : MonoBehaviour
             blockcollider.SetActive(false);
             StartCoroutine("closedelay");
         }
-        else if(triggerOn && thePlayer.IsKeydown && leftdoorscript.isopen && leftdoorscript.canclose) 
+        else if(triggerOn && thePlayer.IsKeydown && leftdoorscript.isopen && leftdoorscript.canclose) //문닫기
         {
             leftdoorscript.isopen = false;
-            leftclose.SetActive(true);
             rightclose.SetActive(true);
             leftopen.SetActive(false);
             rightopen.SetActive(false);
@@ -51,12 +47,12 @@ public class rightopendoor : MonoBehaviour
     }
     IEnumerator closedelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         leftdoorscript.canclose = true;
     }
     IEnumerator opendelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.4f);
         leftdoorscript.canclose = false;
     }
     
@@ -71,7 +67,6 @@ public class rightopendoor : MonoBehaviour
     {
         if (collision.gameObject.name == "fordoor") // 현재 맵 카운팅하기
         {
-            map.mapindex = currentmap;
             triggerOn = true;
         }
     }

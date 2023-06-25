@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b1920b40cb428b946b17e46e43acbcb5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f071364382f7db14497490615212a60f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -273,7 +273,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: b1920b40cb428b946b17e46e43acbcb5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f071364382f7db14497490615212a60f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -516,7 +516,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5eaf2b8c71652a94fb6e2c26abf1b52b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d311d303a9679a4da985871df7fb7c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -600,7 +600,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 5eaf2b8c71652a94fb6e2c26abf1b52b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d311d303a9679a4da985871df7fb7c4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -621,7 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2014567443148461055}
   m_Layer: 0
-  m_Name: sideDoor
+  m_Name: sideDoor 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
