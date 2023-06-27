@@ -65,7 +65,7 @@ public class rightopendoor : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "fordoor") // 현재 맵 카운팅하기
+        if (collision.gameObject.name == "fordoor") 
         {
             triggerOn = true;
         }

@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class leftopendoor : MonoBehaviour
+public class topopendoor : MonoBehaviour
 {
     public bool isopen = false;
     public bool canclose = false;
     public bool triggerOn = false;
     private PlayerMove thePlayer;
-    public GameObject leftclose;
-    public GameObject rightclose;
-    public GameObject leftopen;
-    public GameObject rightopen;
-    public GameObject blockcollider;
+    public GameObject topclose;
+    public GameObject open;
+    public GameObject topblockcollider;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +24,17 @@ public class leftopendoor : MonoBehaviour
         if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
         {
             isopen = true;
-            leftclose.SetActive(false);
-            rightclose.SetActive(false);
-            rightopen.SetActive(true);
-            blockcollider.SetActive(false);
+            topclose.SetActive(false);
+            topblockcollider.SetActive(false);
+            open.SetActive(true);
             StartCoroutine("closedelay");
         }
         else if (triggerOn && thePlayer.IsKeydown && isopen && canclose) // 문닫기
         {
             isopen = false;
-            leftclose.SetActive(true);
-            leftopen.SetActive(false);
-            rightopen.SetActive(false);
-            blockcollider.SetActive(true);
+            topclose.SetActive(true);
+            open.SetActive(false);
+            topblockcollider.SetActive(true);
             StartCoroutine("opendelay");
         }
     }
@@ -62,7 +58,7 @@ public class leftopendoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "fordoor") 
+        if (collision.gameObject.name == "fordoor")
         {
             triggerOn = true;
         }
