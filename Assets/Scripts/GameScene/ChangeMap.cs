@@ -28,16 +28,4 @@ public class ChangeMap : MonoBehaviour
 
     // 박스 콜라이더에 닿는 순간 이벤트 발생
     
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if(collision.gameObject.name == "ToDoor" && thePlayer.IsKeydown)
-        {
-            thePlayer.IsKeydown = false;
-            // SceneManager.LoadScene(changeMapName);
-            theCamera.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, theCamera.transform.position.z);
-            thePlayer.transform.position = target.transform.position;
-            thePlayer.currentMapName = changeMapName;
-            inventorykey.SetActive(false);
-        }
-    }
 }

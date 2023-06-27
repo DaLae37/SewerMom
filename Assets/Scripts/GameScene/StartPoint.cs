@@ -15,7 +15,7 @@ public class StartPoint : MonoBehaviour // 나중에 다른 씬으로 로드하는 거면 필요
     {
         theCamera = FindObjectOfType<CameraManager>(); // 카메라 변수에 카메라 객체를 할당
         thePlayer = FindObjectOfType<PlayerMove>(); // 캐릭터 변수에 현재 캐릭터 객체를 할당
-
+        /*
         if(startPoint == thePlayer.currentMapName)
         {
             // 카메라 이동
@@ -24,7 +24,7 @@ public class StartPoint : MonoBehaviour // 나중에 다른 씬으로 로드하는 거면 필요
             thePlayer.transform.position = this.transform.position;
         }
 
-
+        */
     }
 
     // Update is called once per frame

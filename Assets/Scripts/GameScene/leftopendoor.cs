@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -23,7 +24,12 @@ public class leftopendoor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
+        if(this.transform.parent.name == "firstDoor" && !(thePlayer.useflash) && triggerOn && thePlayer.IsKeydown) // 손전등 안키고가면 못지나감.
+        {
+            // cant open
+            TextLoader.instance.SetText("firstDoor");
+        }
+        else if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
         {
             isopen = true;
             leftclose.SetActive(false);

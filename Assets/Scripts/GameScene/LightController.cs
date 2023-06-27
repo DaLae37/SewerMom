@@ -24,26 +24,26 @@ public class LightController : MonoBehaviour
             
             rotation = Quaternion.Euler(0, 0, -90);
             this.transform.rotation = rotation;
-            this.transform.localPosition = new Vector3(0.7f, 1f, 0f);
+            this.transform.localPosition = new Vector3(0.5f, 1f, 0f);
 
         }
         else if (vector.x == -1f)
         {
             rotation = Quaternion.Euler(0, 0, 90);
             this.transform.rotation = rotation;
-            this.transform.localPosition = new Vector3(-0.7f, 1f, 0f);
+            this.transform.localPosition = new Vector3(-0.5f, 1f, 0f);
         }
         else if (vector.y == 1f)
         {
             rotation = Quaternion.Euler(0, 0, 0);
             this.transform.rotation = rotation;
-            this.transform.localPosition = new Vector3(-0.45f, 0.9f, 0f);
+            this.transform.localPosition = new Vector3(-0.45f, 0.67f, 0f);
         }
         else if (vector.y == -1f)
         {
             rotation = Quaternion.Euler(0, 0, 180);
             this.transform.rotation = rotation;
-            this.transform.localPosition = new Vector3(-0.36f, 0.85f, 0f);
+            this.transform.localPosition = new Vector3(-0.36f, 1.015f, 0f);
         }
         
     }
