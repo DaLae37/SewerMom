@@ -55,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         vector = Vector2.zero;
         if (inhide)
         {
+            GetComponent<Rigidbody2D>().velocity = vector * 0;
             animator.SetBool("Walking", false);
         }
         else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
