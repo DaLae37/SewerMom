@@ -18,8 +18,8 @@ public class MapController : MonoBehaviour
     public GameObject rightuproom; // 8
     public GameObject mainuproom; // 9
     public GameObject mainupuproom; // 10
-    public GameObject passwardroom; // 11
-    public GameObject passwarduproom; // 12
+    public GameObject passwordroom; // 11
+    public GameObject passworduproom; // 12
     private SpriteRenderer sprite;
     public GameObject firstdoor;
     // mainroom과 연결된 문들 //
@@ -29,19 +29,27 @@ public class MapController : MonoBehaviour
     public GameObject mainupdoor;
     public GameObject mainrightdoor;
     //-----------------------//
+    public GameObject mainupupdoor;
     public GameObject mainrightupdoor;
     public GameObject mainrightrightdoor;
     public GameObject rightupdoor;
+    public GameObject passworddoor;
     // Start is called before the first frame update
     void Start()        //새로운 방 추가될때마다 추가해주기. 초기에는 모든게 비활
     {
-        setfirstroom(false);
-        settrainroom(false);
-        setmainroom(false);
-        setmainbottomroom(false);
-        setmainrightroom(false);
-        setrightroom(false);
-        // door
+        setfirstroom(false); // 1
+        settrainroom(false); // 2
+        setmainroom(false); // 3
+        setmainbottomroom(false); // 4
+        setmainrightroom(false); // 5
+        setmainrightuproom(false); // 6
+        setrightroom(false); // 7
+        setrightuproom(false);// 8
+        setmainuproom(false); // 9
+        setmainupuproom(false); // 10
+        setpasswordroom(false); // 11
+        setpassworduproom(false); // 12
+        // door 개수 11개.
         setdoor(false, firstdoor);
         setdoor(false, traindoor);
         setdoor(false, mainrightdoor);
@@ -49,8 +57,10 @@ public class MapController : MonoBehaviour
         settopbottomdoor(false, mainbottomdoor);
         settopbottomdoor(false, mainpassworddoor);
         settopbottomdoor(false, mainupdoor);
+        settopbottomdoor (false, mainupupdoor);
         settopbottomdoor(false, mainrightupdoor);
         settopbottomdoor(false, rightupdoor);
+        settopbottomdoor(false, passworddoor);
     }
 
     // Update is called once per frame
@@ -84,6 +94,8 @@ public class MapController : MonoBehaviour
                 setmainroom(true);
                 setmainrightroom(false);
                 setmainbottomroom(false);
+                setmainuproom(false);
+                setpasswordroom(false);
                 /*To do - main과 연결된 방들과 그 방 안의 문들 false해주기*/
 
                 /*todo - main에 있는 문들 true해주기*/
@@ -95,6 +107,8 @@ public class MapController : MonoBehaviour
                 settopbottomdoor(true, mainupdoor);
                 settopbottomdoor(false, mainrightupdoor);
                 setdoor(false, mainrightrightdoor);
+                settopbottomdoor(false, passworddoor);
+                settopbottomdoor(false, mainupupdoor);
                 break;
             case 4: // mainbottomroom
                 setmainroom(false);
@@ -108,8 +122,8 @@ public class MapController : MonoBehaviour
             case 5: // mainrightroom
                 setmainroom(false);
                 setmainrightroom(true);
+                setmainrightuproom(false);
                 setrightroom(false);
-
                 setdoor(false, traindoor);
                 setdoor(true, mainrightdoor);
                 setdoor(true, mainrightrightdoor);
@@ -121,16 +135,65 @@ public class MapController : MonoBehaviour
                 /*todo - 연결된 문 제외 - main 문들 안보이게해주기*/
                 break;
             case 6: // mainrightuproom
+                setmainrightroom(false);
+                setmainrightuproom(true);
 
+                setdoor(false, mainrightdoor);
+                setdoor(false, mainrightrightdoor);
+                
                 break;
             case 7: // rightroom
                 setmainrightroom(false);
                 setrightroom(true);
+                setrightuproom(false);
 
                 setdoor(false, mainrightdoor);
                 setdoor(true, mainrightrightdoor);
                 settopbottomdoor(false, mainrightupdoor);
                 settopbottomdoor(true, rightupdoor);
+                break;
+            case 8: // rightuproom
+                setrightroom(false);
+                setrightuproom(true);
+
+                setdoor(false, mainrightrightdoor);
+
+                break;
+            case 9: // mainuproom
+                setmainroom(false);
+                setmainuproom(true);
+                setmainupuproom(false);
+
+                setdoor(false, traindoor);
+                setdoor(false, mainrightdoor);
+                settopbottomdoor(false, mainbottomdoor);
+                settopbottomdoor(true, mainupdoor);
+                settopbottomdoor(true, mainupupdoor);
+                settopbottomdoor(false, mainpassworddoor);
+                break;
+            case 10: // mainupuproom
+                setmainuproom(false);
+                setmainupuproom(true);
+
+                settopbottomdoor(false, mainupdoor);
+                break;
+            case 11: // passwordroom
+                setmainroom(false);
+                setpasswordroom(true);
+                setpassworduproom(false);
+
+                setdoor(false, traindoor);
+                setdoor(false, mainrightdoor);
+                settopbottomdoor(false, mainbottomdoor);
+                settopbottomdoor(false, mainupdoor);
+                settopbottomdoor(true, mainpassworddoor);
+                settopbottomdoor(true, passworddoor);
+                break;
+            case 12: // passworduproom
+                setpasswordroom(false);
+                setpassworduproom(true);
+                
+                settopbottomdoor(false, mainpassworddoor);
                 break;
         }
     }
@@ -189,7 +252,7 @@ public class MapController : MonoBehaviour
         {
             
             sprite.enabled = true;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 trainroom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -197,7 +260,7 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < 3; i++)
             {
                 trainroom.transform.GetChild(i).gameObject.SetActive(false);
             }
@@ -229,7 +292,7 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 mainbottomroom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -237,7 +300,7 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 7; i++)
             {
                 mainbottomroom.transform.GetChild(i).gameObject.SetActive(false);
             }
@@ -252,7 +315,7 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 mainrightroom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -260,19 +323,39 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 10; i++)
             {
                 mainrightroom.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }
-    private void setrightroom(bool active)
+    private void setmainrightuproom(bool active) // 6
+    {
+        sprite = mainrightuproom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 2; i++)
+            {
+                mainrightuproom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 2; i++)
+            {
+                mainrightuproom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    private void setrightroom(bool active) // 7
     {
         sprite = rightroom.GetComponent<SpriteRenderer>();
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 6; i++)
             {
                 rightroom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -280,12 +363,112 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 6; i++)
             {
                 rightroom.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
     }
-
+    private void setrightuproom(bool active) // 8
+    {
+        sprite = rightuproom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 2; i++)
+            {
+                rightuproom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 2; i++)
+            {
+                rightuproom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    private void setmainuproom(bool active) // 9
+    {
+        sprite = mainuproom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 6; i++)
+            {
+                mainuproom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 6; i++)
+            {
+                mainuproom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    private void setmainupuproom(bool active) // 10
+    {
+        sprite = mainupuproom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 3; i++)
+            {
+                mainupuproom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 3; i++)
+            {
+                mainupuproom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    private void setpasswordroom(bool active) // 11
+    {
+        sprite = passwordroom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 3; i++)
+            {
+                passwordroom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 3; i++)
+            {
+                passwordroom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+    private void setpassworduproom(bool active) // 12
+    {
+        sprite = passworduproom.GetComponent<SpriteRenderer>();
+        if (active)
+        {
+            sprite.enabled = true;
+            for (int i = 0; i < 2; i++)
+            {
+                passworduproom.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
+        else
+        {
+            sprite.enabled = false;
+            for (int i = 0; i < 2; i++)
+            {
+                passworduproom.transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+    }
+   
 }
 

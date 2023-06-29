@@ -26,12 +26,11 @@ public class ItemManager : MonoBehaviour
             this.GetComponent<BoxCollider2D>().enabled = false;
             triggerOn = false;
         }
-        if (item.name == "Flashlight" && thePlayer.useitem) // flash 아이템 사용
+        if (item.name == "flashlight" && thePlayer.useitem) // flash 아이템 사용
         {
             thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
             thePlayer.animator.SetBool("lighton", true);
-            inventoryitem.SetActive(false);      
-            item.SetActive(false);
+            inventoryitem.SetActive(false);
             thePlayer.haveitem = false;
             thePlayer.useflash = true;
         }

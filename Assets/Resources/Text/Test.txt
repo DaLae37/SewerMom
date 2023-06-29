@@ -7,3 +7,4 @@ StartRoomClose:문이 잠겨있는 것 같다.
 GetKey:열쇠를 획득했다.
 firstDoor:그냥 가기엔 위험할 것 같다. 손전등을 켜고 가자.
 GetFlash:손전등을 획득했다.
+GetKnife:칼을 획득했다.
