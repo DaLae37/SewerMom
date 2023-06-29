@@ -29,8 +29,11 @@ public class TutorialCameraManager : MonoBehaviour
             // vectorA -> B까지 T의 속도로 이동
             this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
-            Vector3 position = new Vector3(Mathf.Clamp(transform.position.x, 0f, 38.9f), Mathf.Clamp(transform.position.y + 0.5f, -2.4f, 0.4f), transform.position.z);
-            transform.position = position;
+            if(target.GetComponent<TutorialPlayer>().sceneManager.tutorialPhase < 6)
+            {
+                Vector3 position = new Vector3(Mathf.Clamp(transform.position.x, 0f, 38.9f), Mathf.Clamp(transform.position.y + 0.5f, -2.4f, 0.4f), transform.position.z);
+                transform.position = position;
+            }
         }
     }
 }

@@ -101,6 +101,7 @@ public class TutorialSceneManager : MonoBehaviour
 
                 break;
             case 5: // ¿‘¿Â
+
                 break;
             default:
                 break;

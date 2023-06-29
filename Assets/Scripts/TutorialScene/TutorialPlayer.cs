@@ -27,6 +27,8 @@ public class TutorialPlayer : MonoBehaviour
             sceneManager.textTimer = 0f;
             sceneManager.isTextRender = true;
             sceneManager.loader.SetText("TutorialItemEat");
+
+            sceneManager.tutorialPhase++;
         }
     }
 
@@ -69,9 +71,10 @@ public class TutorialPlayer : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "portal")
+        if (collision.gameObject.name == "portal" && sceneManager.tutorialPhase == 5)
         {
-            sceneManager.GameScene();
+            transform.position = new Vector3(102, -3.5f, 0);
+            sceneManager.tutorialPhase++;
         }
         if (collision.collider.name == "chocolate" && player.IsKeydown && sceneManager.tutorialPhase == 3)
         {
