@@ -9,3 +9,5 @@ firstdoor:그냥 가기엔 위험할 것 같다. 손전등을 켜고 가자.
 GetFlash:손전등을 획득했다.
 GetKnife:칼을 획득했다.
 mainupdoor:문이 열리지 않는다. 열쇠구멍이 보인다.
+UseKey:열쇠구멍에 열쇠를 넣어 돌렸다.
+meetbigrat:큰 쥐가 길을 막고있다.

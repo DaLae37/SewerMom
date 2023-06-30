@@ -7,7 +7,7 @@ public class ItemManager : MonoBehaviour
     private bool triggerOn = false;
     private PlayerMove thePlayer;
     public GameObject item;
-    private string itemname;
+    
     public GameObject inventoryitem;
     public string settext;
     // Start is called before the first frame update
@@ -23,7 +23,11 @@ public class ItemManager : MonoBehaviour
         {
             if(this.name == "flashlightitem")
             {
-                itemname = "flashlight";
+                thePlayer.itemname = "flashlight";
+            }
+            else if(this.name == "keyitem")
+            {
+                thePlayer.itemname = "goldkey";
             }
             inventoryitem.SetActive(true);
             TextLoader.instance.SetText(settext);
@@ -32,19 +36,20 @@ public class ItemManager : MonoBehaviour
             this.GetComponent<BoxCollider2D>().enabled = false;
             triggerOn = false;
         }
-        if (thePlayer.useitem)
+        if(thePlayer.useitem && thePlayer.itemname == "flashlight") // flash 아이템 사용
         {
-            if(itemname == "flashlight") // flash 아이템 사용
-            {
-                thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
-                thePlayer.animator.SetBool("lighton", true);
-                inventoryitem.SetActive(false);
-                thePlayer.haveitem = false;
-                thePlayer.useflash = true;
-                itemname = "";
-            }
+            thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
+            thePlayer.animator.SetBool("lighton", true);
+            inventoryitem.SetActive(false);
+            thePlayer.haveitem = false;
+            thePlayer.useflash = true;
+            thePlayer.itemname = "";
         }
-        
+        else if (thePlayer.useitem && thePlayer.itemname == "goldkey") 
+        {
+            // bottomopendoor에 구현 todo 작동제대로 안됨.
+            
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {

@@ -339,6 +339,7 @@ public class MapController : MonoBehaviour
             {
                 mainrightuproom.transform.GetChild(i).gameObject.SetActive(true);
             }
+
         }
         else
         {
@@ -347,6 +348,7 @@ public class MapController : MonoBehaviour
             {
                 mainrightuproom.transform.GetChild(i).gameObject.SetActive(false);
             }
+
         }
     }
     private void setrightroom(bool active) // 7
@@ -375,18 +377,14 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 2; i++)
-            {
-                rightuproom.transform.GetChild(i).gameObject.SetActive(true);
-            }
+            rightuproom.transform.GetChild(0).gameObject.SetActive(true);
+            rightuproom.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
         }
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 2; i++)
-            {
-                rightuproom.transform.GetChild(i).gameObject.SetActive(false);
-            }
+            rightuproom.transform.GetChild(0).gameObject.SetActive(false);
+            rightuproom.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
     private void setmainuproom(bool active) // 9
