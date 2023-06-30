@@ -6,8 +6,10 @@ public class ItemManager : MonoBehaviour
 {
     private bool triggerOn = false;
     private PlayerMove thePlayer;
-    public GameObject inventoryitem;
     public GameObject item;
+    private string itemname;
+    public GameObject inventoryitem;
+    public string settext;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,24 +17,32 @@ public class ItemManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (triggerOn && thePlayer.IsKeydown) // 아이템 획득
         {
+            if(this.name == "flashlightitem")
+            {
+                itemname = "flashlight";
+            }
             inventoryitem.SetActive(true);
-            TextLoader.instance.SetText("GetFlash");
+            TextLoader.instance.SetText(settext);
             thePlayer.haveitem = true;
-            item.SetActive(false);
+            item.gameObject.SetActive(false);
             this.GetComponent<BoxCollider2D>().enabled = false;
             triggerOn = false;
         }
-        if (item.name == "flashlight" && thePlayer.useitem) // flash 아이템 사용
+        if (thePlayer.useitem)
         {
-            thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
-            thePlayer.animator.SetBool("lighton", true);
-            inventoryitem.SetActive(false);
-            thePlayer.haveitem = false;
-            thePlayer.useflash = true;
+            if(itemname == "flashlight") // flash 아이템 사용
+            {
+                thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
+                thePlayer.animator.SetBool("lighton", true);
+                inventoryitem.SetActive(false);
+                thePlayer.haveitem = false;
+                thePlayer.useflash = true;
+                itemname = "";
+            }
         }
         
     }

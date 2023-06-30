@@ -15,6 +15,7 @@ public class PlayerMove : MonoBehaviour
     public bool haveitem = false;
     public bool useitem = false;
     public bool useflash = false;
+    public bool usekey = false;
     public bool inhide = false;
 
     // Start is called before the first frame update

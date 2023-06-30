@@ -24,7 +24,12 @@ public class bottomopendoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(triggerOn && thePlayer.IsKeydown && !topdoorscript.isopen && !topdoorscript.canclose) //문열기
+        if (this.transform.parent.name == "mainupdoor" && !(thePlayer.useflash) && triggerOn && thePlayer.IsKeydown) // 열쇠안쓰면 문 못염.
+        {
+            // cant open
+            TextLoader.instance.SetText("mainupdoor");
+        }
+        else if (triggerOn && thePlayer.IsKeydown && !topdoorscript.isopen && !topdoorscript.canclose) //문열기
         {
             topdoorscript.isopen = true;
             bottomclose.SetActive(false);

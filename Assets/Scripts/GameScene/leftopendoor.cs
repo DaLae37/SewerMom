@@ -24,10 +24,10 @@ public class leftopendoor : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(this.transform.parent.name == "firstDoor" && !(thePlayer.useflash) && triggerOn && thePlayer.IsKeydown) // 손전등 안키고가면 못지나감.
+        if(this.transform.parent.name == "firstdoor" && !(thePlayer.useflash) && triggerOn && thePlayer.IsKeydown) // 손전등 안키고가면 못지나감.
         {
             // cant open
-            TextLoader.instance.SetText("firstDoor");
+            TextLoader.instance.SetText("firstdoor");
         }
         else if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
         {
