@@ -68,9 +68,29 @@ public class TutorialPlayer : MonoBehaviour
             sceneManager.loader.SetText("TutorialItemGet");
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.name == "door" && player.IsKeydown && sceneManager.tutorialPhase == 7)
+        {
+            sceneManager.tutorialPhase++;
 
+            sceneManager.doorOpen = true;
+            sceneManager.doorAnimation = true;
+            sceneManager.buttonTimer = 0f;
+            sceneManager.door.SetActive(false);
+            sceneManager.sewerDoor.SetActive(true);
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.gameObject.name == "6" && sceneManager.tutorialPhase == 6)
+        {
+            sceneManager.textTimer = 0f;
+            sceneManager.isTextRender = true;
+            sceneManager.loader.SetText("TutorialDoor");
+            sceneManager.block2.SetActive(false);
+            sceneManager.tutorialPhase++;
+        }
         if (collision.gameObject.name == "portal" && sceneManager.tutorialPhase == 5)
         {
             transform.position = new Vector3(102, -3.5f, 0);

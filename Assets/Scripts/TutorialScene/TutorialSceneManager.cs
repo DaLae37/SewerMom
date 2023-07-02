@@ -35,6 +35,16 @@ public class TutorialSceneManager : MonoBehaviour
     public GameObject UIchocolate;
     public GameObject block;
 
+    [Header("6")]
+    public GameObject block2;
+
+    [Header("7")]
+    public GameObject door;
+    public GameObject sewerDoor;
+    public GameObject player;
+    public bool doorAnimation;
+    public bool doorOpen;
+
     public float buttonTimer = 0;
     public float textTimer = 0;
     public float arrowTimer = 0;
@@ -45,6 +55,8 @@ public class TutorialSceneManager : MonoBehaviour
     {
         tutorialPhase = 0;
         isTextRender = false;
+        doorAnimation = false;
+        doorOpen = false;
     }
 
     // Update is called once per frame
@@ -102,6 +114,26 @@ public class TutorialSceneManager : MonoBehaviour
                 break;
             case 5: // ÀÔÀå
 
+                break;
+            case 6:
+
+                break;
+            case 7:
+
+                break;
+            case 8:
+                if (doorOpen && doorAnimation && buttonTimer > 0.7f)
+                {
+                    buttonTimer = 0;
+                    door.SetActive(true);
+                    sewerDoor.SetActive(false);
+                    player.SetActive(false);
+                    doorAnimation = false;
+                }
+                else if(doorOpen && !doorAnimation && buttonTimer > 0.7f)
+                {
+                    GameScene();
+                }
                 break;
             default:
                 break;
