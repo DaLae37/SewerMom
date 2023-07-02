@@ -10,7 +10,7 @@ public class PlayerMove : MonoBehaviour
     private Vector2 vector; // 움직이는 방향 정의
     // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
     public Animator animator;
-
+    //사실 여기서 = false로 해도 적용되는건 아님. 인스펙터에서 조정하거나 start함수에서 조정해야함.
     public bool IsKeydown = false;
     public bool haveitem = false;
     public bool useitem = false;
@@ -19,6 +19,7 @@ public class PlayerMove : MonoBehaviour
     public bool inhide = false;
     public bool usecheese = false;
     public bool usebitecheese = false;
+    public bool uselighter = false;
     public string itemname;
 
     // Start is called before the first frame update

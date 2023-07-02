@@ -13,7 +13,7 @@ public class bottomopendoor : MonoBehaviour
     public GameObject bottomblockcollider;
     public GameObject topinteraction; // 왼쪽문 열고닫기 판정하는 오브젝트 가져오기. (isopen 공유를 위해)
     topopendoor topdoorscript; // 왼쪽문 스크립트 가져오기
-    public GameObject inventoryitem; //아이템UI 가져오기
+    public GameObject inventorykey; //아이템UI 가져오기
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +33,7 @@ public class bottomopendoor : MonoBehaviour
         {
             TextLoader.instance.SetText("UseKey");
             thePlayer.haveitem = false;
-            inventoryitem.SetActive(false);
+            inventorykey.SetActive(false);
             thePlayer.itemname = "";
             thePlayer.usekey = true;
         } 

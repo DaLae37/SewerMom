@@ -5,6 +5,7 @@ using UnityEngine;
 public class BigRatMove : MonoBehaviour
 {
     // ㅡㅡㅡㅡㅡㅡ이동ㅡㅡㅡㅡㅡㅡ //
+    public bool blockplayer;
     public float speed; // 움직이는 속도 정의
     private Vector2 vector;
     // ㅡㅡㅡㅡㅡㅡ애니메이션ㅡㅡㅡㅡㅡㅡ //
@@ -20,10 +21,11 @@ public class BigRatMove : MonoBehaviour
     // Update is called once per frame
     private void FixedUpdate()
     {
+
         vector = Vector2.zero;
-        if (mapcontrol.mapindex == 8)
+        if (mapcontrol.mapindex == 8 && blockplayer)
         {
-            if (Input.GetAxisRaw("Vertical") != 0)
+            if (Input.GetAxisRaw("Vertical") != 0 && Input.GetAxisRaw("Horizontal") == 0)
             {
                 vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
                 if (vector.x != 0)

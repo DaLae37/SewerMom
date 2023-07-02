@@ -7,12 +7,29 @@ TutorialDoor:A버튼을 눌러 문을 열 수 있습니다.
 cantescape:문이 열리지 않는다. 잠긴 듯 하다.
 toodark:더 가기엔 너무 어둡다. 쥐에게 말을 걸어보자.
 friendlyrat:쥐가 따라오라는 것 같다.
-meetbigrat:큰 쥐가 길을 막고있다.
+meetbigrat:큰 쥐가 길을 막고 있다.
 firstdoor:그냥 가기엔 위험할 것 같다. 손전등을 켜고 가자.
 GetFlash:손전등을 획득했다.
 mainupdoor:문이 열리지 않는다. 열쇠구멍이 보인다.
-GetCheese:치즈를 얻었다.
+GetCheese:치즈를 획득했다.
 GetKey:열쇠를 획득했다.
 UseKey:열쇠구멍에 열쇠를 넣어 돌렸다.
 newspaper:오래전 숨바꼭질 중 사라진 아이에 대한 신문이다.
-usecheese:치즈를 쥐에게 줬다.
+usecheese:치즈를 쥐에게 줬더니 조용해졌다.
+usecheesebigrat:치즈를 큰 쥐에게 줬다.
+firstusecheese:치즈를 다 사용하고 얻자.
+railroad:위험해 보인다. 가지 말자.
+LadderFirst:맨홀 뚜껑이다. 힘껏 밀어도 열리지 않는다.
+MainWoodDoor:나무문이다. 손잡이가 고장나서 열 수 없다.
+Skeleton:사람의 뼈인 것 같다.
+PasswordHint:해골 그림이다. 옆에 땅 방향으로 화살표가 그려져있다.
+CorrectPassword:문이 열렸다.
+RabbitDoll:집에 있는 토끼 인형이랑 똑같다. 근데 좀 지저분하다.
+GirlDoll:여자아이 인형이다.
+RainBook:여자아이가 그려져 있는 책이다.
+GetLighter:라이터를 획득했다.
+RemoveWoodDoor:나무 문에 불을 붙였다.
+MonsterDie:괴물이 열차에 치였다. 왼쪽에서 무슨 소리가 들렸다.
+ClearDoor:문이 열린다! 얼른 나가자.
+BigratNoCheese:쥐에게 줄 남은 치즈가 없다.
+SewerMomSay:아이... 찾으면... 치즈... 준다...
