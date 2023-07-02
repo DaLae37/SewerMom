@@ -22,7 +22,7 @@ public class TextLoader : MonoBehaviour
     {
         instance = this;
         isChainingDone = true;
-        LoadTextFromFile("Test");
+        LoadTextFromFile("Text");
     }
 
     // Update is called once per frame

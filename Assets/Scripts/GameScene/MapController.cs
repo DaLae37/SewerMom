@@ -239,10 +239,18 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
+            for (int i = 0; i < 2; i++)
+            {
+                firstroom.transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
         else
         {
             sprite.enabled = false;
+            for (int i = 0; i < 2; i++)
+            {
+                firstroom.transform.GetChild(i).gameObject.SetActive(false);
+            }
         }
     }
     private void settrainroom(bool active) // 2
@@ -292,7 +300,7 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 6; i++)
             {
                 mainbottomroom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -300,7 +308,7 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 6; i++)
             {
                 mainbottomroom.transform.GetChild(i).gameObject.SetActive(false);
             }
@@ -453,7 +461,8 @@ public class MapController : MonoBehaviour
         if (active)
         {
             sprite.enabled = true;
-            for (int i = 0; i < 2; i++)
+            passworduproom.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            for (int i = 1; i < 2; i++)
             {
                 passworduproom.transform.GetChild(i).gameObject.SetActive(true);
             }
@@ -461,7 +470,8 @@ public class MapController : MonoBehaviour
         else
         {
             sprite.enabled = false;
-            for (int i = 0; i < 2; i++)
+            passworduproom.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            for (int i = 1; i < 2; i++)
             {
                 passworduproom.transform.GetChild(i).gameObject.SetActive(false);
             }

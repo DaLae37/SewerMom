@@ -3,11 +3,16 @@ TutorialUpDown:↑ ↓ 버튼을 눌러 위, 아래로 이동할 수 있습니�
 TutorialItemGet:A 버튼을 눌러 아이템을 얻을 수 있습니다.
 TutorialItemUse:S 버튼을 눌러 아이템을 사용할 수 있습니다.
 TutorialItemEat:맛있다.
-StartRoomClose:문이 잠겨있는 것 같다.
-GetKey:열쇠를 획득했다.
+TutorialDoor:A버튼을 눌러 문을 열 수 있습니다.
+cantescape:문이 열리지 않는다. 잠긴 듯 하다.
+toodark:더 가기엔 너무 어둡다. 쥐에게 말을 걸어보자.
+friendlyrat:쥐가 따라오라는 것 같다.
+meetbigrat:큰 쥐가 길을 막고있다.
 firstdoor:그냥 가기엔 위험할 것 같다. 손전등을 켜고 가자.
 GetFlash:손전등을 획득했다.
-GetKnife:칼을 획득했다.
 mainupdoor:문이 열리지 않는다. 열쇠구멍이 보인다.
+GetCheese:치즈를 얻었다.
+GetKey:열쇠를 획득했다.
 UseKey:열쇠구멍에 열쇠를 넣어 돌렸다.
-meetbigrat:큰 쥐가 길을 막고있다.
+newspaper:오래전 숨바꼭질 중 사라진 아이에 대한 신문이다.
+usecheese:치즈를 쥐에게 줬다.

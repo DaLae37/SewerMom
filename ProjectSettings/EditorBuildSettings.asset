@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PasswordScene.unity
     guid: f4c050fd20feebc45abb2372b749d536
+  - enabled: 1
+    path: Assets/Scenes/GameScene.unity
+    guid: a1ef6b07b93eae8449228d48d18f552c
   m_configObjects: {}
