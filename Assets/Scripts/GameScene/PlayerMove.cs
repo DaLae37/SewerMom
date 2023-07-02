@@ -21,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     public bool usebitecheese = false;
     public bool uselighter = false;
     public string itemname;
-
+    public bool climbladder = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,7 +58,11 @@ public class PlayerMove : MonoBehaviour
     private void FixedUpdate()
     {
         vector = Vector2.zero;
-        if (inhide)
+        if(climbladder)
+        {
+            // 사다리 오르고 내리는 동안 방향키 조정 x
+        }
+        else if (inhide)
         {
             GetComponent<Rigidbody2D>().velocity = vector * 0;
             animator.SetBool("Walking", false);
