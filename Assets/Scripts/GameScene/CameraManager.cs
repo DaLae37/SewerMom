@@ -9,18 +9,19 @@ public class CameraManager : MonoBehaviour
     public GameObject target; // 카메라가 따라갈 대상
     public float moveSpeed; // 카메라가 따라갈 속도
     private Vector3 targetPosition; // 대상의 현재 위치
+    public bool isTargeting;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        isTargeting = true;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         // 대상이 있는지 체크
-        if(target.gameObject != null)
+        if(isTargeting && target.gameObject != null)
         {
             // this는 카메라를 의미 (z값은 카메라 값 그대로 유지)
             targetPosition.Set(target.transform.position.x, target.transform.position.y, this.transform.position.z);

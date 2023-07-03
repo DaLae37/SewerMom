@@ -88,4 +88,20 @@ public class PlayerMove : MonoBehaviour
 
         }
     }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Train")
+        {
+            StoryManager.instance.Death(3);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Story")
+        {
+            StoryManager.instance.storyPhase = int.Parse(collision.name);
+            collision.gameObject.SetActive(false);
+        }
+    }
 }
