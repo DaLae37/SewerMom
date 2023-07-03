@@ -39,10 +39,11 @@ public class ladder : MonoBehaviour
                 thePlayer.GetComponent<Rigidbody2D>().velocity = vector;
                 thePlayer.animator.SetFloat("DirX", 0f);
                 thePlayer.animator.SetFloat("DirY", 1f);
-                thePlayer.animator.SetBool("Walking", false); // climb 모션으로 대체하기
+                thePlayer.animator.SetBool("climbing", true); // climb 모션으로 대체하기
             }
             else // 사다리 다 올라갔다면.
             {
+                thePlayer.animator.SetBool("climbcomplete", true);
                 ladderblock.SetActive(true);
                 thePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 downset();
@@ -69,11 +70,12 @@ public class ladder : MonoBehaviour
                 thePlayer.GetComponent<Rigidbody2D>().velocity = vector;
                 thePlayer.animator.SetFloat("DirX", 0f);
                 thePlayer.animator.SetFloat("DirY", 1f);
-                thePlayer.animator.SetBool("Walking", false); // climb 모션으로 대체하기
+                thePlayer.animator.SetBool("climbcomplete", false);
             }
             else
             {
                 thePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                thePlayer.animator.SetBool("climbing", false);
                 ladderblock.SetActive(true);
                 thePlayer.climbladder = false;
                 candown = false;
@@ -84,6 +86,9 @@ public class ladder : MonoBehaviour
             // todo 괴물 있을떄 전철 건너로 점프하기
             if (thePlayer.transform.position.y > -0.3)
             {
+                thePlayer.animator.SetBool("jump", true);
+                thePlayer.animator.SetBool("climbing", false);
+                thePlayer.animator.SetBool("climbcomplete", false);
                 thePlayer.animator.SetFloat("DirX", -1f);
                 thePlayer.animator.SetFloat("DirY", 0f);
                 thePlayer.animator.SetBool("Walking", true);
@@ -91,6 +96,7 @@ public class ladder : MonoBehaviour
             }
             else
             {
+                thePlayer.animator.SetBool("jump", false);
                 thePlayer.animator.SetBool("Walking", false);
                 thePlayer.GetComponent<Rigidbody2D>().gravityScale = 0;
                 thePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
