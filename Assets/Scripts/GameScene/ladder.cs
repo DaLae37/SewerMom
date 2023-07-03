@@ -34,25 +34,35 @@ public class ladder : MonoBehaviour
         }
         else if (climing)
         {
-            if (thePlayer.transform.position.y < 2.6)
+            if (thePlayer.transform.position.y < 2.6) // 사다리 올라가기
             {
                 thePlayer.GetComponent<Rigidbody2D>().velocity = vector;
                 thePlayer.animator.SetFloat("DirX", 0f);
                 thePlayer.animator.SetFloat("DirY", 1f);
                 thePlayer.animator.SetBool("Walking", false); // climb 모션으로 대체하기
             }
-            else
+            else // 사다리 다 올라갔다면.
             {
+                ladderblock.SetActive(true);
                 thePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
                 downset();
-                if (thePlayer.IsKeydown)
+                if (thePlayer.IsKeydown && !ismomhere) // 그냥 내려갈때 충돌체 없애주기
                 {
+                    ladderblock.SetActive(false);
                     candown = true;
                     climing = false;
                 }
+                else if (thePlayer.IsKeydown && ismomhere) // 점프해서 갈땐 충돌체 안없애줘도됨.
+                {
+                    candown = true;
+                    climing = false;
+                    thePlayer.GetComponent<Rigidbody2D>().gravityScale = 1;
+                    thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
+                }
+                   
             }
         }
-        else if (candown && !ismomhere)
+        else if (candown && !ismomhere) // 괴물이 없을때 그냥 내려오기
         {
             if(thePlayer.transform.position.y > -3.18)
             {
@@ -69,9 +79,24 @@ public class ladder : MonoBehaviour
                 candown = false;
             }
         }
-        else if(candown && thePlayer.IsKeydown && ismomhere)
+        else if(candown && ismomhere)
         {
             // todo 괴물 있을떄 전철 건너로 점프하기
+            if (thePlayer.transform.position.y > -0.3)
+            {
+                thePlayer.animator.SetFloat("DirX", -1f);
+                thePlayer.animator.SetFloat("DirY", 0f);
+                thePlayer.animator.SetBool("Walking", true);
+                
+            }
+            else
+            {
+                thePlayer.animator.SetBool("Walking", false);
+                thePlayer.GetComponent<Rigidbody2D>().gravityScale = 0;
+                thePlayer.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+                thePlayer.climbladder = false;
+                candown = false;
+            }
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
