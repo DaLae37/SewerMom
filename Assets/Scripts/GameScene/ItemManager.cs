@@ -49,15 +49,19 @@ public class ItemManager : MonoBehaviour
             triggerOn = false;
             
         }
-        if(this.name == "flashlightitem" && thePlayer.useitem && thePlayer.itemname == "flashlight") // flash 아이템 사용
+        if(StoryManager.instance.lightOn || this.name == "flashlightitem" && thePlayer.useitem && thePlayer.itemname == "flashlight") // flash 아이템 사용
         {
+            if (!StoryManager.instance.lightOn)
+            {
+                inventoryitem.SetActive(false);
+                thePlayer.haveitem = false;
+                thePlayer.itemname = "";
+            }
+            thePlayer.useflash = true;
             thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D 활성
             thePlayer.transform.GetChild(1).gameObject.SetActive(true); // light 2D 활성
             thePlayer.animator.SetBool("lighton", true);
-            inventoryitem.SetActive(false);
-            thePlayer.haveitem = false;
-            thePlayer.useflash = true;
-            thePlayer.itemname = "";
+            StoryManager.instance.lightOn = false;
             // todo 쥐 플레이어 따라가기
         }
         else if (thePlayer.useitem && thePlayer.itemname == "goldkey") 

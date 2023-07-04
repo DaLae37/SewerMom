@@ -29,14 +29,22 @@ public class bottomopendoor : MonoBehaviour
             // cant open
             TextLoader.instance.SetText("mainupdoor");
         }
-        else if(this.transform.parent.name == "mainupdoor" && !(thePlayer.usekey) && triggerOn && thePlayer.useitem && thePlayer.itemname == "goldkey") // 열쇠 사용.
+        else if (this.transform.parent.name == "mainupdoor" && !(thePlayer.usekey) && triggerOn && thePlayer.useitem && thePlayer.itemname == "goldkey") // 열쇠 사용.
         {
             TextLoader.instance.SetText("UseKey");
             thePlayer.haveitem = false;
             inventorykey.SetActive(false);
             thePlayer.itemname = "";
             thePlayer.usekey = true;
-        } 
+        }
+        else if (transform.parent.name == "passworddoor" && !StoryManager.instance.passwordClear)
+        {
+            if (thePlayer.IsKeydown && triggerOn && !StoryManager.instance.passwordClear && !StoryManager.instance.passwordOn)
+            {
+                thePlayer.IsKeydown = false;
+                StoryManager.instance.passwordOn = true;
+            }            
+        }
         else if (triggerOn && thePlayer.IsKeydown && !topdoorscript.isopen && !topdoorscript.canclose) //문열기
         {
             topdoorscript.isopen = true;

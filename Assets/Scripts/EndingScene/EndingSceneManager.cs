@@ -9,13 +9,27 @@ public class EndingSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        endingResult = PlayerPrefs.GetInt("endingResult");
+        endingResult = PlayerPrefs.GetInt("EndingReason");
+        if(endingResult == 0)
+        {
+            PlayerPrefs.DeleteAll();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.anyKey)
+        {
+            if(endingResult == 0)
+            {
+                LoadingScene();
+            }
+            else
+            {
+                GameScene();
+            }
+        }
     }
 
     public void LoadingScene()

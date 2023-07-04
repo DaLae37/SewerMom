@@ -35,6 +35,7 @@ public class Password : MonoBehaviour
             }
             else
             {
+                StoryManager.instance.inputPassword = passwordText.text;
                 ResetPassword();
             }
         }

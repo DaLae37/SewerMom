@@ -57,9 +57,18 @@ public class TextLoader : MonoBehaviour
         }
     }
 
+    public void SetTextRed(string key)
+    {
+        Text.text = text[key];
+        Text.color = Color.red;
+        textBackground.SetActive(true);
+        StartCoroutine(TextCloser());
+    }
+
     public void SetText(string key)
     {
         Text.text = text[key];
+        Text.color = Color.white;
         textBackground.SetActive(true);
         StartCoroutine(TextCloser());
     }

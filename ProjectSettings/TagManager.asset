@@ -9,6 +9,7 @@ TagManager:
   - FlashLight
   - Story
   - Train
+  - Password
   layers:
   - Default
   - TransparentFX

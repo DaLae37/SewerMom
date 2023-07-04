@@ -7,7 +7,7 @@ public class PlayerMove : MonoBehaviour
 {
     // ㅡㅡㅡㅡㅡㅡ플레이어 이동ㅡㅡㅡㅡㅡㅡ //
     public float speed; // 움직이는 속도 정의
-    private Vector2 vector; // 움직이는 방향 정의
+    public Vector2 vector; // 움직이는 방향 정의
     // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
     public Animator animator;
     //사실 여기서 = false로 해도 적용되는건 아님. 인스펙터에서 조정하거나 start함수에서 조정해야함.
@@ -37,10 +37,8 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.A))
         {
             IsKeydown = true;
-        }
-       
+        } 
         if (Input.GetKeyUp(KeyCode.A))
-
         {
             IsKeydown = false;
         }
@@ -94,13 +92,22 @@ public class PlayerMove : MonoBehaviour
         {
             StoryManager.instance.Death(3);
         }
+        if(collision.gameObject.tag == "Monster")
+        {
+            if(collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
+            {
+                StoryManager.instance.Death(2);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Story")
         {
-            StoryManager.instance.storyPhase = int.Parse(collision.name);
+            if(StoryManager.instance.storyPhase < int.Parse(collision.name)){
+                StoryManager.instance.storyPhase = int.Parse(collision.name);
+            }
             collision.gameObject.SetActive(false);
         }
     }

@@ -34,7 +34,7 @@ public class HideOn : MonoBehaviour
         if(hide)
         {
             waitforhide += Time.deltaTime;
-            if(waitforhide > 1 && thePlayer.IsKeydown)
+            if(waitforhide > 1 && thePlayer.IsKeydown && StoryManager.instance.storyPhase != 8)
             {
                 thePlayer.animator.SetFloat("DirX", 0);
                 thePlayer.animator.SetFloat("DirY", -1f);   // 라커 나올 때 아래 방향 보면서 나옴
