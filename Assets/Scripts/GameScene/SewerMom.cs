@@ -116,6 +116,32 @@ public class SewerMom : MonoBehaviour
         {
 
         }
+        else if(walkOn == 4 && StoryManager.instance.storyPhase == 12)
+        {
+            state = State.WALK;
+            currentMap = 3;
+            DirX = -1;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(5.5f, transform.position.y, 0), Time.deltaTime * 4);
+            if(transform.position.x < 9.5)
+            {
+                currentMap = 2;
+            }
+            if (transform.position.x < 5.6f && StoryManager.instance.player.GetComponent<PlayerMove>().climbladder)
+            {
+                DirX = 0;
+                DirY = 1;
+                walkOn = 5;
+            }
+        }
+        else if(walkOn == 4444 && StoryManager.instance.storyPhase == 12)
+        {
+            transform.position = new Vector2(transform.position.x, transform.position.y - Time.deltaTime * 5);
+            if(transform.position.y < -15)
+            {
+                TextLoader.instance.SetText("MonsterDie");
+                StoryManager.instance.storyPhase = 13;
+            }
+        }
     }
 
     void ChangeAnimation()
@@ -155,5 +181,12 @@ public class SewerMom : MonoBehaviour
     {
 
     }
- 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Train" && StoryManager.instance.storyPhase == 12)
+        {
+            StoryManager.instance.monster.walkOn = 4444;
+        }
+    }
 }

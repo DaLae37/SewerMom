@@ -11,6 +11,7 @@ public class PlayerMove : MonoBehaviour
     // ㅡㅡㅡㅡㅡㅡ플레이어 애니메이션ㅡㅡㅡㅡㅡㅡ //
     public Animator animator;
     //사실 여기서 = false로 해도 적용되는건 아님. 인스펙터에서 조정하거나 start함수에서 조정해야함.
+    public bool hadCheese = false;
     public bool IsKeydown = false;
     public bool haveitem = false;
     public bool useitem = false;
@@ -88,10 +89,6 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Train")
-        {
-            StoryManager.instance.Death(3);
-        }
         if(collision.gameObject.tag == "Monster")
         {
             if(collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
@@ -103,7 +100,11 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Story")
+        if (collision.gameObject.tag == "Train")
+        {
+            StoryManager.instance.Death(3);
+        }
+        if (collision.tag == "Story")
         {
             if(StoryManager.instance.storyPhase < int.Parse(collision.name)){
                 StoryManager.instance.storyPhase = int.Parse(collision.name);

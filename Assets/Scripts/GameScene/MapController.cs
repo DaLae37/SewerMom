@@ -155,9 +155,8 @@ public class MapController : MonoBehaviour
             case 8: // rightuproom
                 setrightroom(false);
                 setrightuproom(true);
-
+                settopbottomdoor(true, rightupdoor);
                 setdoor(false, mainrightrightdoor);
-
                 break;
             case 9: // mainuproom
                 setmainroom(false);

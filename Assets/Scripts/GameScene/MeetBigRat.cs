@@ -18,7 +18,14 @@ public class MeetBigRat : MonoBehaviour
     {
         if (collision.gameObject.name == "fordoor")
         {
-            TextLoader.instance.SetText("meetbigrat");
+            if(StoryManager.instance.player.GetComponent<PlayerMove>().hadCheese && StoryManager.instance.player.GetComponent<PlayerMove>().usebitecheese)
+            {
+                StoryManager.instance.Death(2);
+            }
+            else if(transform.parent.GetComponent<BigRatMove>().blockplayer)
+            {
+                TextLoader.instance.SetText("meetbigrat");
+            }
         }
     }
 }

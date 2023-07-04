@@ -22,7 +22,7 @@ public class escapedoor : MonoBehaviour
         }
         else if(triggerOn && thePlayer.IsKeydown && canescape)
         {
-            // todo 엔딩씬 연결해주기
+            TextLoader.instance.SetText("ClearDoor");
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

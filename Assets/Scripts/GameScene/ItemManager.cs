@@ -36,6 +36,7 @@ public class ItemManager : MonoBehaviour
             else if(this.name == "cheeseitem")
             {
                 thePlayer.itemname = "cheese";
+                thePlayer.hadCheese = true;
             }
             else if(this.name == "lighteritem")
             {

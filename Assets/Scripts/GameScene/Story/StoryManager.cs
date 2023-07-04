@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 public class StoryManager : MonoBehaviour
@@ -47,11 +49,30 @@ public class StoryManager : MonoBehaviour
 
     [Header("9")]
     public bool setRespawn3 = false;
-    public GameObject underBlock;
-    public GameObject open;
-    public GameObject close;
+    public GameObject underBlock1;
+    public GameObject open1;
+    public GameObject close1;
     public GameObject cheese;
     public GameObject cheeseUI;
+
+    [Header("10")]
+    public bool setRespawn4 = false;
+    public BigRatMove rat;
+    public GameObject keyUI;
+    public GameObject key;
+    public GameObject underBlock2;
+    public GameObject door2;
+    public GameObject open2;
+    public GameObject close2;
+    [Header("11")]
+    public GameObject block11;
+
+    [Header("12")]
+    public bool activeOnce3 = false;
+
+    [Header("13")]
+    public escapedoor escapedoor;
+    public bool activeOnce4 = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -113,13 +134,39 @@ public class StoryManager : MonoBehaviour
                 friendlyMouse.SetActive(false);
                 player.transform.position = new Vector2(18.75f, 4.5f);
                 controller.mapindex = 11;
-                underBlock.SetActive(false);
-                open.SetActive(true);
-                close.SetActive(false);
+                underBlock1.SetActive(false);
+                open1.SetActive(true);
+                close1.SetActive(false);
                 cheese.SetActive(false);
                 cheeseUI.SetActive(true);
                 player.GetComponent<PlayerMove>().itemname = "cheese";
                 player.GetComponent<PlayerMove>().haveitem = true;
+                player.GetComponent<PlayerMove>().hadCheese = true;
+                break;
+            case 4:
+                storyPhase = 10;
+                lightOn = true;
+                monster.walkOn = 4;
+                if (cantogo.activeSelf)
+                {
+                    cantogo.SetActive(false);
+                }
+                if (flashLight.activeSelf)
+                {
+                    flashLight.SetActive(false);
+                }
+                friendlyMouse.SetActive(false);
+                player.transform.position = new Vector2(80, 4);
+                cheese.SetActive(false);
+                keyUI.SetActive(true);
+                key.SetActive(false);
+                open2.SetActive(true);
+                close2.SetActive(false);
+                underBlock2.SetActive(false);
+                player.GetComponent<PlayerMove>().itemname = "goldkey";
+                player.GetComponent<PlayerMove>().haveitem = true;
+                rat.blockplayer = false;
+                controller.mapindex = 8;
                 break;
         }
     }
@@ -254,6 +301,39 @@ public class StoryManager : MonoBehaviour
                 {
                     setRespawn3 = true;
                     PlayerPrefs.SetInt("Respawn", 3);
+                }
+                if(player.GetComponent<PlayerMove>().itemname == "goldkey")
+                {
+                    storyPhase += 1;
+                }
+                break;
+            case 10:
+                if (!setRespawn4)
+                {
+                    setRespawn4 = true;
+                    PlayerPrefs.SetInt("Respawn", 4);
+                }
+                if (player.GetComponent<PlayerMove>().itemname == "lighter")
+                {
+                    storyPhase += 1;
+                    block11.SetActive(true);
+                }
+                break;
+            case 11:
+                
+                break;
+            case 12:
+                if (!activeOnce3 && player.GetComponent<PlayerMove>().itemname =="")
+                {
+                    monster.gameObject.SetActive(true);
+                    monster.transform.position = new Vector2(30, -0.9f);
+                    activeOnce3 = true;
+                }
+                break;
+            case 13:
+                if (!activeOnce4)
+                {
+                    escapedoor.canescape = true;
                 }
                 break;
         }
