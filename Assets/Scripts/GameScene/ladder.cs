@@ -24,8 +24,19 @@ public class ladder : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!ismomhere)
+        {
+            ismomhere = (StoryManager.instance.storyPhase == 12);
+        }
+        if (!climing)
+        {
+            if (thePlayer.transform.position.y < -3.432764) transform.GetComponent<SpriteRenderer>().sortingOrder = 4;
+            else transform.GetComponent<SpriteRenderer>().sortingOrder = 6;
+        }
+
         if (triggerOn && thePlayer.IsKeydown && !thePlayer.climbladder)
         {
+            transform.GetComponent<SpriteRenderer>().sortingOrder = 4;
             thePlayer.climbladder = true;
             //오르는 함수
             climbset();
@@ -60,12 +71,12 @@ public class ladder : MonoBehaviour
                     thePlayer.GetComponent<Rigidbody2D>().gravityScale = 1;
                     thePlayer.GetComponent<Rigidbody2D>().velocity = new Vector2(-10, 0);
                 }
-                   
+
             }
         }
         else if (candown && !ismomhere) // 괴물이 없을때 그냥 내려오기
         {
-            if(thePlayer.transform.position.y > -3.18)
+            if (thePlayer.transform.position.y > -3.18)
             {
                 thePlayer.GetComponent<Rigidbody2D>().velocity = vector;
                 thePlayer.animator.SetFloat("DirX", 0f);
@@ -81,7 +92,7 @@ public class ladder : MonoBehaviour
                 candown = false;
             }
         }
-        else if(candown && ismomhere)
+        else if (candown && ismomhere)
         {
             // todo 괴물 있을떄 전철 건너로 점프하기
             if (thePlayer.transform.position.y > -0.3)
@@ -92,7 +103,7 @@ public class ladder : MonoBehaviour
                 thePlayer.animator.SetFloat("DirX", -1f);
                 thePlayer.animator.SetFloat("DirY", 0f);
                 thePlayer.animator.SetBool("Walking", true);
-                
+
             }
             else
             {

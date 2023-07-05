@@ -20,16 +20,33 @@ public class Train : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(transform.position.x + Time.deltaTime * ((shakeX) ? -0.25f : 0.25f), transform.position.y - Time.deltaTime * 5, transform.position.z);
-        if(transform.position.x < -0.1f || transform.position.x > 0.3f)
+        if(StoryManager.instance.controller.mapindex == 2)
         {
-            shakeX = !shakeX;
+            if (!audio.isPlaying)
+            {
+                audio.Play();
+            }
+            GetComponent<SpriteRenderer>().enabled = true;
+            transform.position = new Vector3(transform.position.x + Time.deltaTime * ((shakeX) ? -0.25f : 0.25f), transform.position.y - Time.deltaTime * 5, transform.position.z);
+            if (transform.position.x < -0.1f || transform.position.x > 0.3f)
+            {
+                shakeX = !shakeX;
+            }
+            if (transform.position.y < -50)
+            {
+                transform.position = originPos;
+                audio.Stop();
+                audio.Play();
+            }
         }
-        if (transform.position.y < -50)
+        else
         {
-            transform.position = originPos;
-            audio.Stop();
-            audio.Play();
+            GetComponent<SpriteRenderer>().enabled = false;
+            if (!audio.isPlaying)
+            {
+                audio.Stop();
+            }
         }
+
     }
 }

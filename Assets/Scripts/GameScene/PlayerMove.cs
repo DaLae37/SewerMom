@@ -27,7 +27,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-       
     }
 
 
@@ -93,7 +92,7 @@ public class PlayerMove : MonoBehaviour
         {
             if(collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
             {
-                StoryManager.instance.Death(2);
+                StoryManager.instance.Death(1);
             }
         }
     }

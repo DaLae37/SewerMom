@@ -108,6 +108,10 @@ public class friendlyrat : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().enabled = true;
             }
+            else
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
         else if (walkOn == 5 && StoryManager.instance.storyPhase == 3)
         {

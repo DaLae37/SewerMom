@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 public class StoryManager : MonoBehaviour
 {
@@ -40,6 +41,7 @@ public class StoryManager : MonoBehaviour
     public bool passwordClear = false;
     public bool passwordOn = false;
     public string inputPassword;
+    public Light2D global;
 
     [Header("7")]
     public bool activeOnce1 = false;
@@ -102,6 +104,7 @@ public class StoryManager : MonoBehaviour
                 }
                 friendlyMouse.transform.position = new Vector3(11.5f, -0.1f, 0);
                 friendlyMouse.GetComponent<friendlyrat>().walkOn = 5;
+                controller.mapindex = 1;
                 break;
             case 2:
                 storyPhase = 3;
@@ -244,12 +247,14 @@ public class StoryManager : MonoBehaviour
             case 6:
                 if (passwordOn)
                 {
+                    global.intensity = 1f;
                     Camera.main.GetComponent<CameraManager>().isTargeting = false;
                     Camera.main.transform.position = new Vector3(-500, 0, -10);
                     if (inputPassword == "1253")
                     {
                         passwordClear = true;
                         passwordOn = false;
+                        TextLoader.instance.SetText("CorrectPassword");
                     }
                     if (player.GetComponent<PlayerMove>().IsKeydown)
                     {
@@ -259,6 +264,7 @@ public class StoryManager : MonoBehaviour
                 }
                 else
                 {
+                    global.intensity = 0f;
                     Camera.main.GetComponent<CameraManager>().isTargeting = true;
                 }
                 if(player.GetComponent<PlayerMove>().itemname == "cheese")
@@ -284,7 +290,7 @@ public class StoryManager : MonoBehaviour
                 if(!activeOnce2 && hideTimer > 2f)
                 {
                     activeOnce2 = true;
-                    TextLoader.instance.SetText("SewerMomSay");
+                    TextLoader.instance.SetTextRed("SewerMomSay");
                     hideTimer = 0f;
                 }
                 else if(activeOnce2)

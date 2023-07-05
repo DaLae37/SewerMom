@@ -62,7 +62,7 @@ public class TextLoader : MonoBehaviour
         Text.text = text[key];
         Text.color = Color.red;
         textBackground.SetActive(true);
-        StartCoroutine(TextCloser());
+        StartCoroutine(TextCloserRed());
     }
 
     public void SetText(string key)
@@ -73,6 +73,12 @@ public class TextLoader : MonoBehaviour
         StartCoroutine(TextCloser());
     }
 
+    IEnumerator TextCloserRed()
+    {
+        yield return new WaitForSeconds(2f);
+        Text.text = "";
+        textBackground.SetActive(false);
+    }
     IEnumerator TextCloser()
     {
         yield return new WaitForSeconds(1f);

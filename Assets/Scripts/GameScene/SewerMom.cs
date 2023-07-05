@@ -74,7 +74,11 @@ public class SewerMom : MonoBehaviour
             animationSelector = 0;
             state = State.IDLE;
         }
-        ChangeAnimation();
+        if(walkOn!= 4444)
+        {
+            ChangeAnimation();
+        }
+
 
         if(walkOn == 0 && StoryManager.instance.storyPhase == 4)
         {

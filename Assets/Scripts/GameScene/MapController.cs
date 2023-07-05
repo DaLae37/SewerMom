@@ -179,7 +179,6 @@ public class MapController : MonoBehaviour
             case 11: // passwordroom
                 setmainroom(false);
                 setpasswordroom(true);
-                setpassworduproom(false);
 
                 setdoor(false, traindoor);
                 setdoor(false, mainrightdoor);
