@@ -24,6 +24,7 @@ public class HideOn : MonoBehaviour
     {
         if (triggerOn && thePlayer.IsKeydown && canhide)
         {
+            StoryManager.instance.hideTimer = 0f;
             lockerOpen.SetActive(true);
             thePlayer.inhide = true;
             thePlayer.animator.SetFloat("DirX", 0);

@@ -16,6 +16,9 @@ public class EndingSceneManager : MonoBehaviour
     public GameObject[] arrow; 
     void Start()
     {
+        SoundManager.instance.PlayerOff();
+        SoundManager.instance.MomOff();
+        SoundManager.instance.MouseOff();
         timer = 0;
         endingResult = PlayerPrefs.GetInt("EndingReason");
         if(endingResult == 0)

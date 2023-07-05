@@ -9,7 +9,6 @@ public class SewerMom : MonoBehaviour
     {
         IDLE,
         WALK,
-        FOLLOW_TARGET,
     }
     public enum MoveState
     {
@@ -21,6 +20,8 @@ public class SewerMom : MonoBehaviour
     public State state;
     public MoveState moveState;
 
+    public bool isAnimation = false;
+    public bool playerOn = false;
     public GameObject[] animation = new GameObject[12];
     public float animationMaxTime = 0.2f;
     private float animationTimer;
@@ -41,17 +42,86 @@ public class SewerMom : MonoBehaviour
         animationSelector = 0;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Player") {
-            PlayerPrefs.SetInt("endingResult", 1);
-            SceneManager.LoadScene("EndingScene");
-        }
-    }
-
     // Update is called once per frame
     void Update()
     {
+        if(!isAnimation && playerOn)
+        {
+            if(StoryManager.instance.controller.mapindex == currentMap)
+            {
+                if(StoryManager.instance.storyPhase >= 5)
+                {
+                    state = State.WALK;
+                    if (Mathf.Abs(StoryManager.instance.player.transform.position.y - (transform.position.y - 2.5f)) > 0.2f)
+                    {
+                        if (StoryManager.instance.player.transform.position.y < transform.position.y - 2.5f)
+                        {
+                            DirY = -1;
+                            DirX = 0;
+                        }
+                        else
+                        {
+                            DirY = 1;
+                            DirX = 0;
+                        }
+                        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, StoryManager.instance.player.transform.position.y, 0), Time.deltaTime * 6);
+                    }
+                    else
+                    {
+                        if (StoryManager.instance.player.transform.position.x < transform.position.x)
+                        {
+                            DirX = -1;
+                            DirY = 0;
+                        }
+                        else
+                        {
+                            DirX = 1;
+                            DirY = 0;
+                        }
+                        transform.position = Vector3.MoveTowards(transform.position, new Vector3(StoryManager.instance.player.transform.position.x, transform.position.y, 0), Time.deltaTime * 6);
+                    }
+                }
+            }
+            else
+            {
+                if (StoryManager.instance.hideTimer > 2f)
+                {
+                    int before = StoryManager.instance.beforeMap;
+                    int after = StoryManager.instance.afterMap;
+                    if (before == 3 && after == 4)
+                    {
+                        currentMap = 4;
+                        transform.position = StoryManager.instance.controller.mainbottomdoor.transform.position;
+                    }
+                    if (before == 3 && after == 5)
+                    {
+                        currentMap = 5;
+                        transform.position = StoryManager.instance.controller.mainrightdoor.transform.position;
+                    }
+                    if (before == 3 && after == 11)
+                    {
+                        currentMap = 11;
+                        transform.position = StoryManager.instance.controller.mainpassworddoor.transform.position;
+                    }
+                    if(before == 5 && after == 6)
+                    {
+                        currentMap = 6;
+                        transform.position = StoryManager.instance.controller.mainrightupdoor.transform.position;
+                    }
+                    if (before == 5 && after == 7)
+                    {
+                        currentMap = 6;
+                        transform.position = StoryManager.instance.controller.mainrightrightdoor.transform.position;
+                    }
+                    if (before == 7 && after == 8)
+                    {
+                        currentMap = 8;
+                        transform.position = StoryManager.instance.controller.rightupdoor.transform.position;
+                    }
+                }
+            }
+        }
+
         if(state == State.IDLE)
         {
             if (SoundManager.instance.mom.isPlaying)
@@ -89,14 +159,14 @@ public class SewerMom : MonoBehaviour
             animationSelector = 0;
             state = State.IDLE;
         }
+
         if(walkOn!= 4444)
         {
             ChangeAnimation();
         }
-
-
         if(walkOn == 0 && StoryManager.instance.storyPhase == 4)
         {
+            isAnimation = true;
             state = State.WALK;
             currentMap = 3;
             DirY = -1;
@@ -117,10 +187,12 @@ public class SewerMom : MonoBehaviour
             {
                 DirX = 0;
                 walkOn = 2;
+                isAnimation = false;
             }
         }
         else if(walkOn == 2 && StoryManager.instance.storyPhase == 7)
         {
+            isAnimation = true;
             state = State.WALK;
             currentMap = 11;
             DirY = 1;
@@ -128,15 +200,13 @@ public class SewerMom : MonoBehaviour
             if (transform.position.y > 10.9f)
             {
                 currentMap = 11;
-                walkOn = 3;
+                walkOn = 4;
+                isAnimation = false;
             }
-        }
-        else if (walkOn == 3 && StoryManager.instance.storyPhase == 7)
-        {
-
         }
         else if(walkOn == 4 && StoryManager.instance.storyPhase == 12)
         {
+            isAnimation = true;
             state = State.WALK;
             currentMap = 3;
             DirX = -1;
@@ -145,11 +215,25 @@ public class SewerMom : MonoBehaviour
             {
                 currentMap = 2;
             }
-            if (transform.position.x < 5.6f && StoryManager.instance.player.GetComponent<PlayerMove>().climbladder)
+            if (transform.position.x < 5.6f)
             {
-                DirX = 0;
-                DirY = 1;
-                walkOn = 5;
+                if (StoryManager.instance.player.GetComponent<PlayerMove>().climbladder)
+                {
+                    DirX = 0;
+                    DirY = 1;
+                    walkOn = 5;
+                }
+                else
+                {
+                    isAnimation = false;
+                }
+            }
+        }
+        else if(walkOn == 5 && StoryManager.instance.storyPhase == 12)
+        {
+            if(StoryManager.instance.player.GetComponent<Rigidbody2D>().gravityScale == 0)
+            {
+                isAnimation = false;
             }
         }
         else if(walkOn == 4444 && StoryManager.instance.storyPhase == 12)

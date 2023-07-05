@@ -48,6 +48,9 @@ public class StoryManager : MonoBehaviour
 
     [Header("8")]
     public bool activeOnce2 = false;
+    public bool feed41 = false;
+    public bool feed42 = false;
+    public bool feed6 = false;
 
     [Header("9")]
     public bool setRespawn3 = false;
@@ -84,7 +87,7 @@ public class StoryManager : MonoBehaviour
         spawnMonster = false;
 
         storyPhase = PlayerPrefs.GetInt("Story");
-        Respawn(PlayerPrefs.GetInt("Respawn"));
+        Respawn(2);
         instance = this;
     }
 
@@ -191,10 +194,64 @@ public class StoryManager : MonoBehaviour
     void Update()
     {
         hideTimer += Time.deltaTime;
+        if (storyPhase >= 8)
+        {
+            if(controller.mapindex == 4 && (!feed41 || !feed42))
+            {
+                if (!SoundManager.instance.mouse.isPlaying)
+                {
+                    SoundManager.instance.MouseOn();
+                }
+            }
+            else if(controller.mapindex == 6 && (!feed6))
+            {
+                if (!SoundManager.instance.mouse.isPlaying)
+                {
+                    SoundManager.instance.MouseOn();
+                }
+            }
+            else
+            {
+                SoundManager.instance.MouseOff();
+            }
+        }
         if (!monster.gameObject.activeSelf)
         {
-            monster.GetComponent<SewerMom>().state = SewerMom.State.IDLE;
-            
+            monster.playerOn = false;
+            SoundManager.instance.MomOff();
+        }
+        if (monster.playerOn)
+        {
+            if(!SoundManager.instance.bgm.isPlaying)
+                SoundManager.instance.PlayBGM(2);
+
+            if (storyPhase >= 8  && controller.mapindex == 4 && (!feed41 || !feed42))
+            {
+                if (player.GetComponent<PlayerMove>().inhide && hideTimer > 1f)
+                {
+                    SoundManager.instance.PlayEffect(12);
+                    Death(3);
+                }
+            }
+            else if (storyPhase >= 8 && controller.mapindex == 6 && (!feed6))
+            {
+                if (player.GetComponent<PlayerMove>().inhide && hideTimer > 1f)
+                {
+                    SoundManager.instance.PlayEffect(12);
+                    Death(3);
+                }
+            }
+
+            if (beforeMap == controller.mapindex)
+            {
+                monster.currentMap = controller.mapindex;
+                monster.transform.position = new Vector2(player.transform.position.x - 1, player.transform.position.y + 2.9f);
+            }
+        }
+        else
+        {
+            if (SoundManager.instance.bgm.isPlaying)
+                SoundManager.instance.StopBGM();
         }
         switch (storyPhase)
         {
@@ -226,6 +283,7 @@ public class StoryManager : MonoBehaviour
                 if (!monster.gameObject.activeSelf)
                 {
                     monster.gameObject.SetActive(true);
+                    monster.playerOn = true;
                 }
                 if (controller.mapindex != 3)
                 {
@@ -235,21 +293,13 @@ public class StoryManager : MonoBehaviour
                 }
                 break;
             case 5:
-                if (hideTimer > 1f)
-                {
-
-                }
-                if (controller.mapindex == 3)
-                {
-                    monster.currentMap = controller.mapindex;
-                    monster.transform.position = new Vector2(player.transform.position.x - 1, player.transform.position.y + 2.9f);
-                }
                 if (player.GetComponent<PlayerMove>().inhide)
                 {
                     monster.gameObject.SetActive(false);
                     monster.DirX = 0;
                     monster.DirY = 0;
                     storyPhase += 1;
+                    monster.playerOn = false;
                 }
                 break;
             case 6:

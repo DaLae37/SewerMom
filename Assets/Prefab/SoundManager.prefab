@@ -336,6 +336,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f83675446cb2c934b9ea53fb36b7840b, type: 3}
   - {fileID: 8300000, guid: f3991445cdf55774ba2766492b523e7b, type: 3}
   - {fileID: 8300000, guid: a30c27e98918c4645bb8013cbb7e22b4, type: 3}
+  - {fileID: 8300000, guid: e42275b62764add459ba96ebac2b90a9, type: 3}
   player: {fileID: 0}
   mom: {fileID: 0}
   mouse: {fileID: 0}

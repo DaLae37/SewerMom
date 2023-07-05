@@ -62,6 +62,7 @@ public class PlayerMove : MonoBehaviour
         }
         else if (inhide)
         {
+            SoundManager.instance.PlayerOff();
             GetComponent<Rigidbody2D>().velocity = vector * 0;
             animator.SetBool("Walking", false);
         }
@@ -89,11 +90,12 @@ public class PlayerMove : MonoBehaviour
                 SoundManager.instance.PlayerOff();
         }
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Monster")
+        if (collision.gameObject.tag == "Monster")
         {
-            if(collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
+            if (collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
             {
                 StoryManager.instance.Death(1);
                 SoundManager.instance.PlayEffect(12);
@@ -103,6 +105,14 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Monster")
+        {
+            if (collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
+            {
+                StoryManager.instance.Death(1);
+                SoundManager.instance.PlayEffect(12);
+            }
+        }
         if (collision.gameObject.tag == "Train")
         {
             StoryManager.instance.Death(3);

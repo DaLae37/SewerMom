@@ -82,7 +82,8 @@ public class SoundManager : MonoBehaviour
 
     public void StopBGM()
     {
-        bgm.Stop();
+        if(bgm.isPlaying)
+            bgm.Stop();
     }
 
     public void PlayEffect(int index)

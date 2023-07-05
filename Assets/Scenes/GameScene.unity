@@ -5548,6 +5548,9 @@ MonoBehaviour:
   global: {fileID: 411690335}
   activeOnce1: 0
   activeOnce2: 0
+  feed41: 0
+  feed42: 0
+  feed6: 0
   setRespawn3: 0
   underBlock1: {fileID: 467758518}
   open1: {fileID: 1036970057}
@@ -6611,14 +6614,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 8015211679517930396, guid: a82d9d3f31f03e14c86795eb8f4063d4, type: 3}
-      propertyPath: effectList.Array.size
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8015211679517930396, guid: a82d9d3f31f03e14c86795eb8f4063d4, type: 3}
-      propertyPath: effectList.Array.data[24]
-      value: 
-      objectReference: {fileID: 8300000, guid: e42275b62764add459ba96ebac2b90a9, type: 3}
     - target: {fileID: 8015211679517930397, guid: a82d9d3f31f03e14c86795eb8f4063d4, type: 3}
       propertyPath: m_Name
       value: SoundManager
@@ -8401,6 +8396,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6106625289316421470, guid: 3b225e68ab860cd429168d1b18abcef9, type: 3}
   m_PrefabInstance: {fileID: 1304713886}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1333205340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333205341}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1333205341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333205340}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 78.075, y: 2.8, z: 0.0023893025}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361199474
 GameObject:
   m_ObjectHideFlags: 0
@@ -8888,6 +8914,10 @@ PrefabInstance:
     - target: {fileID: 6488616541888352971, guid: 53398c7dd7568c5438968261ba54c5bf, type: 3}
       propertyPath: m_Offset.y
       value: -1.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6488616541888352971, guid: 53398c7dd7568c5438968261ba54c5bf, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6912348505139598412, guid: 53398c7dd7568c5438968261ba54c5bf, type: 3}
       propertyPath: m_SortingOrder

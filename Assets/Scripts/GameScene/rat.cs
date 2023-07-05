@@ -31,6 +31,14 @@ public class rat : MonoBehaviour
             else
             {
                 TextLoader.instance.SetText("usecheese");
+                if(StoryManager.instance.controller.mapindex == 4)
+                {
+                    StoryManager.instance.feed41 = true;
+                }
+                if(StoryManager.instance.controller.mapindex == 6)
+                {
+                    StoryManager.instance.feed6 = true;
+                }
             }
             inventoryitemcheese.SetActive(false);
             thePlayer.itemname = "bitecheese";
@@ -50,6 +58,21 @@ public class rat : MonoBehaviour
             else
             {
                 TextLoader.instance.SetText("usecheese");
+                if (StoryManager.instance.controller.mapindex == 4)
+                {
+                    if (StoryManager.instance.feed41)
+                    {
+                        StoryManager.instance.feed42 = true;
+                    }
+                    else
+                    {
+                        StoryManager.instance.feed41 = true;
+                    }
+                }
+                if (StoryManager.instance.controller.mapindex == 6)
+                {
+                    StoryManager.instance.feed6 = true;
+                }
             }
             inventoryitembitecheese.SetActive(false);
             thePlayer.itemname = "";
