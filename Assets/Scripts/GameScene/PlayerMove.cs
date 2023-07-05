@@ -67,6 +67,8 @@ public class PlayerMove : MonoBehaviour
         }
         else if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
+            if(StoryManager.instance != null)
+                SoundManager.instance.PlayerOn();
             vector.Set(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
              // 입력한 vector 값을 받아 파라미터로 전달 -> 받은 파라미터를 기반으로 애니메이션 실행
              // 동시입력시에 상하키는 기본 0이 되도록 설정
@@ -83,7 +85,8 @@ public class PlayerMove : MonoBehaviour
         {
             animator.SetBool("Walking", false);
             GetComponent<Rigidbody2D>().velocity = vector * speed;
-
+            if (StoryManager.instance != null)
+                SoundManager.instance.PlayerOff();
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -93,6 +96,7 @@ public class PlayerMove : MonoBehaviour
             if(collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
             {
                 StoryManager.instance.Death(1);
+                SoundManager.instance.PlayEffect(12);
             }
         }
     }

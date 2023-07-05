@@ -57,6 +57,7 @@ public class TutorialSceneManager : MonoBehaviour
         isTextRender = false;
         doorAnimation = false;
         doorOpen = false;
+        SoundManager.instance.PlayBGM(1);
     }
 
     // Update is called once per frame
@@ -124,6 +125,7 @@ public class TutorialSceneManager : MonoBehaviour
             case 8:
                 if (doorOpen && doorAnimation && buttonTimer > 0.7f)
                 {
+                    SoundManager.instance.PlayEffect(4);
                     buttonTimer = 0;
                     door.SetActive(true);
                     sewerDoor.SetActive(false);
@@ -132,6 +134,7 @@ public class TutorialSceneManager : MonoBehaviour
                 }
                 else if(doorOpen && !doorAnimation && buttonTimer > 0.7f)
                 {
+                    SoundManager.instance.StopBGM();
                     GameScene();
                 }
                 break;

@@ -27,7 +27,7 @@ public class TutorialPlayer : MonoBehaviour
             sceneManager.textTimer = 0f;
             sceneManager.isTextRender = true;
             sceneManager.loader.SetText("TutorialItemEat");
-
+            SoundManager.instance.PlayEffect(1);
             sceneManager.tutorialPhase++;
         }
     }
@@ -79,6 +79,7 @@ public class TutorialPlayer : MonoBehaviour
             sceneManager.buttonTimer = 0f;
             sceneManager.door.SetActive(false);
             sceneManager.sewerDoor.SetActive(true);
+            SoundManager.instance.PlayEffect(3);
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -94,6 +95,7 @@ public class TutorialPlayer : MonoBehaviour
         if (collision.gameObject.name == "portal" && sceneManager.tutorialPhase == 5)
         {
             transform.position = new Vector3(102, -3.5f, 0);
+            SoundManager.instance.PlayEffect(2);
             sceneManager.tutorialPhase++;
         }
         if (collision.collider.name == "chocolate" && player.IsKeydown && sceneManager.tutorialPhase == 3)

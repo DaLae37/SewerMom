@@ -28,9 +28,11 @@ public class bottomopendoor : MonoBehaviour
         {
             // cant open
             TextLoader.instance.SetText("mainupdoor");
+            SoundManager.instance.PlayEffect(9);
         }
         else if (this.transform.parent.name == "mainupdoor" && !(thePlayer.usekey) && triggerOn && thePlayer.useitem && thePlayer.itemname == "goldkey") // ¿­¼è »ç¿ë.
         {
+            SoundManager.instance.PlayEffect(18);
             TextLoader.instance.SetText("UseKey");
             thePlayer.haveitem = false;
             inventorykey.SetActive(false);
@@ -47,6 +49,7 @@ public class bottomopendoor : MonoBehaviour
         }
         else if (triggerOn && thePlayer.IsKeydown && !topdoorscript.isopen && !topdoorscript.canclose) //¹®¿­±â
         {
+            SoundManager.instance.PlayEffect(3);
             topdoorscript.isopen = true;
             bottomclose.SetActive(false);
             open.SetActive(true);
@@ -55,6 +58,7 @@ public class bottomopendoor : MonoBehaviour
         }
         else if(triggerOn && thePlayer.IsKeydown && topdoorscript.isopen && topdoorscript.canclose) //¹®´Ý±â
         {
+            SoundManager.instance.PlayEffect(4);
             topdoorscript.isopen = false;
             bottomclose.SetActive(true);
             open.SetActive(false);

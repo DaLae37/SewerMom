@@ -52,16 +52,19 @@ public class rightopendoor : MonoBehaviour
                 leftopen.SetActive(false);
                 rightopen.SetActive(false);
                 fireddoor.SetActive(true);
+                SoundManager.instance.PlayEffect(19);
                 Invoke("destroydoor", 2f); // 2초뒤 문 제거
             }
             else if (this.transform.parent.name == "traindoor" && triggerOn && thePlayer.IsKeydown && !leftdoorscript.isopen && !fired)
             {
+                SoundManager.instance.PlayEffect(9);
                 TextLoader.instance.SetText("MainWoodDoor");
                 // do nothing : 아래 로직이 되면 안됨. 나무문은 오른쪽에서 못염.
             }
         }
         else if (this.transform.parent.name == "traindoor" && triggerOn && !welcome) // 처음 메인 룸으로 오면
         {
+            SoundManager.instance.PlayEffect(7);
             leftdoorscript.isopen = false;
             rightclose.SetActive(true);
             leftopen.SetActive(false);
@@ -71,6 +74,7 @@ public class rightopendoor : MonoBehaviour
         }
         else if(triggerOn && thePlayer.IsKeydown && !leftdoorscript.isopen && !leftdoorscript.canclose) //문열기
         {
+            SoundManager.instance.PlayEffect(3);
             leftdoorscript.isopen = true;
             leftclose.SetActive(false);
             rightclose.SetActive(false);
@@ -80,6 +84,7 @@ public class rightopendoor : MonoBehaviour
         }
         else if(triggerOn && thePlayer.IsKeydown && leftdoorscript.isopen && leftdoorscript.canclose) //문닫기
         {
+            SoundManager.instance.PlayEffect(4);
             leftdoorscript.isopen = false;
             rightclose.SetActive(true);
             leftopen.SetActive(false);
@@ -123,5 +128,6 @@ public class rightopendoor : MonoBehaviour
     {
         blockcollider.SetActive(false);
         fireddoor.SetActive(false);
+        SoundManager.instance.PlayEffect(5);
     }
 }

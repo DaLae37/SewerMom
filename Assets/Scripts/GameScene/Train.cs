@@ -42,7 +42,7 @@ public class Train : MonoBehaviour
         else
         {
             GetComponent<SpriteRenderer>().enabled = false;
-            if (!audio.isPlaying)
+            if (audio.isPlaying)
             {
                 audio.Stop();
             }

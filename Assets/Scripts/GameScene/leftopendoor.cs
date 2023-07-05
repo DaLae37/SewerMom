@@ -31,6 +31,7 @@ public class leftopendoor : MonoBehaviour
         }
         else if (triggerOn && thePlayer.IsKeydown && !isopen && !canclose) // 문열기
         {
+            SoundManager.instance.PlayEffect(3);
             isopen = true;
             leftclose.SetActive(false);
             rightclose.SetActive(false);
@@ -40,6 +41,7 @@ public class leftopendoor : MonoBehaviour
         }
         else if (triggerOn && thePlayer.IsKeydown && isopen && canclose) // 문닫기
         {
+            SoundManager.instance.PlayEffect(4);
             isopen = false;
             leftclose.SetActive(true);
             leftopen.SetActive(false);

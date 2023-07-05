@@ -75,7 +75,7 @@ public class TextLoader : MonoBehaviour
 
     IEnumerator TextCloserRed()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
         Text.text = "";
         textBackground.SetActive(false);
     }

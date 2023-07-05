@@ -18,6 +18,7 @@ public class newspaper : MonoBehaviour
         if (triggerOn && thePlayer.IsKeydown) //신문지랑 상호작용.
         {
             TextLoader.instance.SetText("newspaper");
+            SoundManager.instance.PlayEffect(13);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

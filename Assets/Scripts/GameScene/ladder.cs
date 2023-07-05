@@ -36,6 +36,7 @@ public class ladder : MonoBehaviour
 
         if (triggerOn && thePlayer.IsKeydown && !thePlayer.climbladder)
         {
+            SoundManager.instance.PlayEffect(14);
             transform.GetComponent<SpriteRenderer>().sortingOrder = 4;
             thePlayer.climbladder = true;
             //오르는 함수
@@ -76,12 +77,15 @@ public class ladder : MonoBehaviour
         }
         else if (candown && !ismomhere) // 괴물이 없을때 그냥 내려오기
         {
-            if (thePlayer.transform.position.y > -3.18)
+            if (thePlayer.transform.position.y > -3.432764)
             {
+                transform.GetComponent<SpriteRenderer>().sortingOrder = 4;
                 thePlayer.GetComponent<Rigidbody2D>().velocity = vector;
                 thePlayer.animator.SetFloat("DirX", 0f);
                 thePlayer.animator.SetFloat("DirY", 1f);
                 thePlayer.animator.SetBool("climbcomplete", false);
+                if(!SoundManager.instance.effect.isPlaying)
+                    SoundManager.instance.PlayEffect(15);
             }
             else
             {

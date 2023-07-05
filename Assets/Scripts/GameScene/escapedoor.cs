@@ -26,10 +26,12 @@ public class escapedoor : MonoBehaviour
         if (triggerOn && thePlayer.IsKeydown && !canescape) //¹® ¸ø¿°
         {
             TextLoader.instance.SetText("cantescape");
+            SoundManager.instance.PlayEffect(9);
         }
         else if(!checkTimer && triggerOn && thePlayer.IsKeydown && canescape)
         {
             TextLoader.instance.SetText("ClearDoor");
+            SoundManager.instance.PlayEffect(3);
             timer = 0f;
             checkTimer = true;
         }

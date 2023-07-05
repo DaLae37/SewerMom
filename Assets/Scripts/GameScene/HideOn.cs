@@ -28,6 +28,7 @@ public class HideOn : MonoBehaviour
             thePlayer.inhide = true;
             thePlayer.animator.SetFloat("DirX", 0);
             thePlayer.animator.SetFloat("DirY", 1f);    // 라커 들어갈때 위방향보면서 들어감
+            SoundManager.instance.PlayEffect(20);
             Invoke("HideonLocker", 1);
             canhide = false;
         }

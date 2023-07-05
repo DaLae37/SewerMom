@@ -28,19 +28,23 @@ public class ItemManager : MonoBehaviour
             if(this.name == "flashlightitem")
             {
                 thePlayer.itemname = "flashlight";
+                SoundManager.instance.PlayEffect(23);
             }
             else if(this.name == "keyitem")
             {
                 thePlayer.itemname = "goldkey";
+                SoundManager.instance.PlayEffect(21);
             }
             else if(this.name == "cheeseitem")
             {
                 thePlayer.itemname = "cheese";
                 thePlayer.hadCheese = true;
+                SoundManager.instance.PlayEffect(22);
             }
             else if(this.name == "lighteritem")
             {
                 thePlayer.itemname = "lighter";
+                SoundManager.instance.PlayEffect(22);
             }
             inventoryitem.SetActive(true);
             TextLoader.instance.SetText(settext);
@@ -57,6 +61,7 @@ public class ItemManager : MonoBehaviour
                 inventoryitem.SetActive(false);
                 thePlayer.haveitem = false;
                 thePlayer.itemname = "";
+                SoundManager.instance.PlayEffect(10);
             }
             thePlayer.useflash = true;
             thePlayer.transform.GetChild(0).gameObject.SetActive(true); // flashlight 2D È°¼º

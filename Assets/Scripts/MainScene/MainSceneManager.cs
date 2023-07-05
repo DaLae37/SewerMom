@@ -11,6 +11,7 @@ public class MainSceneManager : MonoBehaviour
     void Start()
     {
         cursorIndex = 0;
+        SoundManager.instance.PlayBGM(0);
     }
 
     // Update is called once per frame
@@ -28,6 +29,7 @@ public class MainSceneManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            SoundManager.instance.PlayEffect(0);
             switch (cursorIndex)
             {
                 case 0:

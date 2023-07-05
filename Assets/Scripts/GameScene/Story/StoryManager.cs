@@ -78,6 +78,7 @@ public class StoryManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SoundManager.instance.StopBGM();
         beforeMap = 0;
         afterMap = 0;
         spawnMonster = false;
@@ -190,6 +191,11 @@ public class StoryManager : MonoBehaviour
     void Update()
     {
         hideTimer += Time.deltaTime;
+        if (!monster.gameObject.activeSelf)
+        {
+            monster.GetComponent<SewerMom>().state = SewerMom.State.IDLE;
+            
+        }
         switch (storyPhase)
         {
             case 0:
@@ -241,6 +247,8 @@ public class StoryManager : MonoBehaviour
                 if (player.GetComponent<PlayerMove>().inhide)
                 {
                     monster.gameObject.SetActive(false);
+                    monster.DirX = 0;
+                    monster.DirY = 0;
                     storyPhase += 1;
                 }
                 break;
@@ -279,7 +287,7 @@ public class StoryManager : MonoBehaviour
                     monster.gameObject.SetActive(true);
                     monster.transform.position = new Vector2(18.75f, 0);
                 }
-                if (player.GetComponent<PlayerMove>().inhide)
+                if (monster.gameObject.activeSelf && player.GetComponent<PlayerMove>().inhide)
                 {
                     monster.gameObject.SetActive(false);
                     storyPhase += 1;
@@ -287,15 +295,16 @@ public class StoryManager : MonoBehaviour
                 }
                 break;
             case 8:
-                if(!activeOnce2 && hideTimer > 2f)
+                if(!activeOnce2 && hideTimer > 4f)
                 {
                     activeOnce2 = true;
+                    SoundManager.instance.PlayEffect(24);
                     TextLoader.instance.SetTextRed("SewerMomSay");
                     hideTimer = 0f;
                 }
                 else if(activeOnce2)
                 {
-                    if (hideTimer > 2f)
+                    if (hideTimer > 4f)
                     {
                         monster.gameObject.SetActive(false);
                         storyPhase += 1;

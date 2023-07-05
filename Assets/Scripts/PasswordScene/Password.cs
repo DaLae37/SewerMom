@@ -20,6 +20,8 @@ public class Password : MonoBehaviour
         SetPassword();
         if (Input.GetMouseButtonDown(0))
         {
+            if (StoryManager.instance.passwordOn)
+                SoundManager.instance.PlayEffect(16);
             if (passwordIndex < 4)
             {
                 Ray ray = passwordCamera.ScreenPointToRay(Input.mousePosition);
@@ -36,7 +38,8 @@ public class Password : MonoBehaviour
             else
             {
                 StoryManager.instance.inputPassword = passwordText.text;
-                ResetPassword();
+                if(passwordText.text != "1253")
+                    ResetPassword();
             }
         }
     }
@@ -48,6 +51,9 @@ public class Password : MonoBehaviour
 
     public void ResetPassword()
     {
+        
+        if ((StoryManager.instance != null && (StoryManager.instance.passwordOn)))
+            SoundManager.instance.PlayEffect(17);
         passwordIndex = 0;
         password[0] = "0";
         password[1] = "0";

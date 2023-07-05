@@ -32,6 +32,7 @@ public class friendlyrat : MonoBehaviour
             cantgo.SetActive(false);
             TextLoader.instance.SetText("friendlyrat");
             walkOn = 1;
+            SoundManager.instance.PlayEffect(8);
         }
         else if (walkOn == 1)
         {

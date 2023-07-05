@@ -5,21 +5,21 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class SewerMom : MonoBehaviour
 {
-    enum State
+    public enum State
     {
         IDLE,
         WALK,
         FOLLOW_TARGET,
     }
-    enum MoveState
+    public enum MoveState
     {
         FRONT,
         LEFT,
         RIGHT,
         BACK,
     }
-    State state;
-    MoveState moveState;
+    public State state;
+    public MoveState moveState;
 
     public GameObject[] animation = new GameObject[12];
     public float animationMaxTime = 0.2f;
@@ -52,6 +52,21 @@ public class SewerMom : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(state == State.IDLE)
+        {
+            if (SoundManager.instance.mom.isPlaying)
+            {
+                SoundManager.instance.MomOff();
+            }
+        }
+        else
+        {
+            if (!SoundManager.instance.mom.isPlaying)
+            {
+                SoundManager.instance.MomOn();
+            }
+        }
+
         animationTimer += Time.deltaTime;
         if(DirX == -1)
         {
@@ -190,6 +205,7 @@ public class SewerMom : MonoBehaviour
     {
         if (collision.gameObject.tag == "Train" && StoryManager.instance.storyPhase == 12)
         {
+            SoundManager.instance.PlayEffect(11);
             StoryManager.instance.monster.walkOn = 4444;
         }
     }
