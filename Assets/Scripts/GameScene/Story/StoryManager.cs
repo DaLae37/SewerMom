@@ -87,7 +87,7 @@ public class StoryManager : MonoBehaviour
         spawnMonster = false;
 
         storyPhase = PlayerPrefs.GetInt("Story");
-        Respawn(4);
+        Respawn(PlayerPrefs.GetInt("Respawn"));
         instance = this;
     }
 
