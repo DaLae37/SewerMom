@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -52,9 +53,9 @@ public class SewerMom : MonoBehaviour
                 if(StoryManager.instance.storyPhase >= 5)
                 {
                     state = State.WALK;
-                    if (Mathf.Abs(StoryManager.instance.player.transform.position.y - (transform.position.y - 2.5f)) > 0.2f)
+                    if (Mathf.Abs(StoryManager.instance.player.transform.position.y - (transform.position.y - 3f)) > 1f)
                     {
-                        if (StoryManager.instance.player.transform.position.y < transform.position.y - 2.5f)
+                        if (StoryManager.instance.player.transform.position.y < (transform.position.y - 3f))
                         {
                             DirY = -1;
                             DirX = 0;
@@ -64,7 +65,7 @@ public class SewerMom : MonoBehaviour
                             DirY = 1;
                             DirX = 0;
                         }
-                        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, StoryManager.instance.player.transform.position.y, 0), Time.deltaTime * 6);
+                        transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, StoryManager.instance.player.transform.position.y + 3f, 0), Time.deltaTime * 6);
                     }
                     else
                     {
@@ -84,44 +85,58 @@ public class SewerMom : MonoBehaviour
             }
             else
             {
-                if (StoryManager.instance.hideTimer > 2f)
+                if (StoryManager.instance.hideTimer > 2.5f)
                 {
                     int before = StoryManager.instance.beforeMap;
                     int after = StoryManager.instance.afterMap;
                     if (before == 3 && after == 4)
                     {
                         currentMap = 4;
-                        transform.position = StoryManager.instance.controller.mainbottomdoor.transform.position;
+                        transform.position = new Vector3(33.5f, -2.3f);
                     }
                     if (before == 3 && after == 5)
                     {
                         currentMap = 5;
-                        transform.position = StoryManager.instance.controller.mainrightdoor.transform.position;
+                        transform.position = new Vector3(48, -1, 0);
                     }
                     if (before == 3 && after == 11)
                     {
                         currentMap = 11;
-                        transform.position = StoryManager.instance.controller.mainpassworddoor.transform.position;
+                        transform.position = new Vector3(48, -2.3f, 0);
                     }
                     if(before == 5 && after == 6)
                     {
                         currentMap = 6;
-                        transform.position = StoryManager.instance.controller.mainrightupdoor.transform.position;
+                        transform.position = new Vector3(58, 0, 0);
                     }
                     if (before == 5 && after == 7)
                     {
-                        currentMap = 6;
-                        transform.position = StoryManager.instance.controller.mainrightrightdoor.transform.position;
+                        currentMap = 7;
+                        transform.position = new Vector3(67, -3, 0);
                     }
                     if (before == 7 && after == 8)
                     {
                         currentMap = 8;
-                        transform.position = StoryManager.instance.controller.rightupdoor.transform.position;
+                        transform.position = new Vector3(77, 0, 0);
+                    }
+                    if (before == 9 && after == 10)
+                    {
+                        currentMap = 10;
+                        transform.position = new Vector3(44, 3, 0);
+                    }
+                    if (before == 7 && after == 5)
+                    {
+                        currentMap = 5;
+                        transform.position = new Vector3(67, -3, 0);
                     }
                 }
             }
         }
-
+        if (!playerOn)
+        {
+            DirX = 0;
+            DirY = 0;
+        }
         if(state == State.IDLE)
         {
             if (SoundManager.instance.mom.isPlaying)
@@ -192,6 +207,7 @@ public class SewerMom : MonoBehaviour
         }
         else if(walkOn == 2 && StoryManager.instance.storyPhase == 7)
         {
+            playerOn = true;
             isAnimation = true;
             state = State.WALK;
             currentMap = 11;
@@ -199,13 +215,14 @@ public class SewerMom : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(transform.position.x, 11f, 0), Time.deltaTime * 6);
             if (transform.position.y > 10.9f)
             {
-                currentMap = 11;
+                currentMap = 12;
                 walkOn = 4;
                 isAnimation = false;
             }
         }
         else if(walkOn == 4 && StoryManager.instance.storyPhase == 12)
         {
+            playerOn = true;
             isAnimation = true;
             state = State.WALK;
             currentMap = 3;
@@ -220,7 +237,7 @@ public class SewerMom : MonoBehaviour
                 if (StoryManager.instance.player.GetComponent<PlayerMove>().climbladder)
                 {
                     DirX = 0;
-                    DirY = 1;
+                    DirY = -1;
                     walkOn = 5;
                 }
                 else
@@ -231,7 +248,7 @@ public class SewerMom : MonoBehaviour
         }
         else if(walkOn == 5 && StoryManager.instance.storyPhase == 12)
         {
-            if(StoryManager.instance.player.GetComponent<Rigidbody2D>().gravityScale == 0)
+            if(!StoryManager.instance.player.GetComponent<PlayerMove>().climbladder && StoryManager.instance.player.GetComponent<Rigidbody2D>().gravityScale == 0)
             {
                 isAnimation = false;
             }
@@ -289,7 +306,12 @@ public class SewerMom : MonoBehaviour
     {
         if (collision.gameObject.tag == "Train" && StoryManager.instance.storyPhase == 12)
         {
-            SoundManager.instance.PlayEffect(11);
+            isAnimation = true;
+            playerOn = false;
+            if (!SoundManager.instance.effect.isPlaying)
+            {
+                SoundManager.instance.PlayEffect(11);
+            }
             StoryManager.instance.monster.walkOn = 4444;
         }
     }

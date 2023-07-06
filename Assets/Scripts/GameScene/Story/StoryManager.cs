@@ -87,7 +87,7 @@ public class StoryManager : MonoBehaviour
         spawnMonster = false;
 
         storyPhase = PlayerPrefs.GetInt("Story");
-        Respawn(2);
+        Respawn(PlayerPrefs.GetInt("Respawn"));
         instance = this;
     }
 
@@ -112,6 +112,7 @@ public class StoryManager : MonoBehaviour
                 break;
             case 2:
                 storyPhase = 3;
+                monster.walkOn = 0;
                 lightOn = true;
                 if (cantogo.activeSelf)
                 {
@@ -151,6 +152,9 @@ public class StoryManager : MonoBehaviour
                 player.GetComponent<PlayerMove>().hadCheese = true;
                 break;
             case 4:
+                feed41 = (PlayerPrefs.GetInt("feed41") == 1);
+                feed42 = (PlayerPrefs.GetInt("feed42") == 1);
+                feed6 = (PlayerPrefs.GetInt("feed46") == 1);
                 storyPhase = 10;
                 lightOn = true;
                 monster.walkOn = 4;
@@ -225,24 +229,47 @@ public class StoryManager : MonoBehaviour
             if(!SoundManager.instance.bgm.isPlaying)
                 SoundManager.instance.PlayBGM(2);
 
-            if (storyPhase >= 8  && controller.mapindex == 4 && (!feed41 || !feed42))
+            if (storyPhase >= 8 && controller.mapindex == 4)
             {
-                if (player.GetComponent<PlayerMove>().inhide && hideTimer > 1f)
+                if (player.GetComponent<PlayerMove>().inhide)
                 {
-                    SoundManager.instance.PlayEffect(12);
-                    Death(3);
+                    if ((feed41 && feed42))
+                    {
+                        monster.playerOn = false;
+                        monster.gameObject.SetActive(false);
+                    }
+                    else if (hideTimer > 1f)
+                    {
+                        SoundManager.instance.PlayEffect(12);
+                        Death(3);
+                    }
                 }
             }
-            else if (storyPhase >= 8 && controller.mapindex == 6 && (!feed6))
+            else if (storyPhase >= 8 && controller.mapindex == 6)
             {
-                if (player.GetComponent<PlayerMove>().inhide && hideTimer > 1f)
+                if (player.GetComponent<PlayerMove>().inhide)
                 {
-                    SoundManager.instance.PlayEffect(12);
-                    Death(3);
+                    if (feed6)
+                    {
+                        monster.playerOn = false;
+                        monster.gameObject.SetActive(false);
+                    }
+                    else if (hideTimer > 1f)
+                    {
+                        SoundManager.instance.PlayEffect(12);
+                        Death(3);
+                    }
                 }
             }
-
-            if (beforeMap == controller.mapindex)
+            else if (storyPhase >= 8 && controller.mapindex == 10)
+            {
+                if (player.GetComponent<PlayerMove>().inhide)
+                {
+                    monster.playerOn = false;
+                    monster.gameObject.SetActive(false);
+                }
+            }
+            if (monster.currentMap == controller.mapindex && beforeMap == monster.currentMap)
             {
                 monster.currentMap = controller.mapindex;
                 monster.transform.position = new Vector2(player.transform.position.x - 1, player.transform.position.y + 2.9f);
@@ -345,8 +372,10 @@ public class StoryManager : MonoBehaviour
                 }
                 break;
             case 8:
-                if(!activeOnce2 && hideTimer > 4f)
+                if(!activeOnce2 && hideTimer > 3f)
                 {
+                    monster.playerOn = false;
+                    monster.isAnimation = false;
                     activeOnce2 = true;
                     SoundManager.instance.PlayEffect(24);
                     TextLoader.instance.SetTextRed("SewerMomSay");
@@ -377,6 +406,9 @@ public class StoryManager : MonoBehaviour
                 {
                     setRespawn4 = true;
                     PlayerPrefs.SetInt("Respawn", 4);
+                    PlayerPrefs.GetInt("feed41",feed41 ? 1 : 0);
+                    PlayerPrefs.GetInt("feed42", feed42 ? 1 : 0);
+                    PlayerPrefs.GetInt("feed6", feed6 ? 1 : 0);
                 }
                 if (player.GetComponent<PlayerMove>().itemname == "lighter")
                 {
@@ -409,6 +441,4 @@ public class StoryManager : MonoBehaviour
             afterMap = controller.mapindex;
         }
     }
-
-
 }

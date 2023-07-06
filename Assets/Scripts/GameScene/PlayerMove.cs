@@ -105,6 +105,22 @@ public class PlayerMove : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.name == "spawner9" && StoryManager.instance.storyPhase == 9)
+        {
+            collision.gameObject.SetActive(false);
+            StoryManager.instance.monster.currentMap = StoryManager.instance.controller.mapindex;
+            StoryManager.instance.monster.gameObject.SetActive(true);
+            StoryManager.instance.monster.transform.position = new Vector3(86, -3,0);
+            StoryManager.instance.monster.playerOn = true;
+        }
+        if (collision.gameObject.name == "spawner10" && StoryManager.instance.storyPhase == 10)
+        {
+            collision.gameObject.SetActive(false);
+            StoryManager.instance.monster.currentMap = StoryManager.instance.controller.mapindex;
+            StoryManager.instance.monster.gameObject.SetActive(true);
+            StoryManager.instance.monster.transform.position = new Vector3(38, -3, 0);
+            StoryManager.instance.monster.playerOn = true;
+        }
         if (collision.gameObject.tag == "Monster")
         {
             if (collision.gameObject.GetComponent<SewerMom>().currentMap == StoryManager.instance.controller.mapindex)
