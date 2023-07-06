@@ -15,6 +15,8 @@ public class ladder : MonoBehaviour
     private Vector2 vector;
     private bool climing = false;
     private bool candown = false;
+    public GameObject jumpBlock;
+    float timer = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,7 @@ public class ladder : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        timer += Time.deltaTime;
         if (!ismomhere)
         {
             ismomhere = (StoryManager.instance.storyPhase == 12);
@@ -67,6 +70,8 @@ public class ladder : MonoBehaviour
                 }
                 else if (thePlayer.IsKeydown && ismomhere) // 점프해서 갈땐 충돌체 안없애줘도됨.
                 {
+                    timer = 0f;
+                    jumpBlock.SetActive(false);
                     candown = true;
                     climing = false;
                     thePlayer.GetComponent<Rigidbody2D>().gravityScale = 1;
@@ -99,7 +104,7 @@ public class ladder : MonoBehaviour
         else if (candown && ismomhere)
         {
             // todo 괴물 있을떄 전철 건너로 점프하기
-            if (thePlayer.transform.position.y > -0.3)
+            if (thePlayer.transform.position.y > -0.3f)
             {
                 thePlayer.animator.SetBool("jump", true);
                 thePlayer.animator.SetBool("climbing", false);
@@ -111,6 +116,7 @@ public class ladder : MonoBehaviour
             }
             else
             {
+                jumpBlock.SetActive(true);
                 thePlayer.animator.SetBool("jump", false);
                 thePlayer.animator.SetBool("Walking", false);
                 thePlayer.GetComponent<Rigidbody2D>().gravityScale = 0;

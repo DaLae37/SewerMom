@@ -8174,6 +8174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ladderblock: {fileID: 800828443}
   ismomhere: 0
+  jumpBlock: {fileID: 1493196926}
 --- !u!4 &1230573926 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2994877489699664035, guid: d914b4f5ed5ca9349a5485d7b9fca30a, type: 3}
